@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Knight()
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\n\ Act\ -\ do\ whatever\ the\ Wizard\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environ4ment.\n
+comment2.params=
+comment2.target=void\ move()
+comment3.params=
+comment3.target=void\ interact()
+comment4.params=c
+comment4.target=void\ interact(Character)
+numComments=5

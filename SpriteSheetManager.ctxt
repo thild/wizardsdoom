@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=spriteSheetFile\ id\ blockWidth
+comment0.target=greenfoot.GreenfootImage\ getSprite(java.lang.String,\ int,\ int)
+comment0.text=\n\ This\ uses\ an\ ID\ where\ 0\ will\ be\ the\ first\ image\ on\ the\ sheet.\n\ The\ block\ width\ is\ the\ width\ of\ a\ SQUARE\ block\ on\ the\ sheet,\n\ the\ returned\ image\ will\ also\ be\ a\ SQUARE\ block.\n
+numComments=1

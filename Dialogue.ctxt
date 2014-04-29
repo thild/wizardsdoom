@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=world
+comment0.target=Dialogue(WizardWorld)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Dialog\n
+comment1.params=
+comment1.target=void\ initComponents()
+comment2.params=evt
+comment2.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment3.params=evt
+comment3.target=void\ exitActionPerformed(java.awt.event.ActionEvent)
+comment4.params=
+comment4.target=void\ dispose()
+numComments=5
