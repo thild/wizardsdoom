@@ -1,15 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)  
 import java.awt.*;
 /**
- * Write a description of class Label here.
+ * Simple notification label.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
 public class Label extends Actor
 {
-    //private GreenfootImage button_1 = new GreenfootImage("image_button_no_pressed.png");    
-    //private GreenfootImage button_2 = new GreenfootImage("image_button_pressed.png");    
     
     private boolean mouseDown = false;
     private boolean mouseOver;    
@@ -39,23 +37,18 @@ public class Label extends Actor
     
     public void act() {
         if (!mouseDown && Greenfoot.mousePressed(this)) {      
-            //setImage(button_2);   
-            mouseDown = true; // here  
+            mouseDown = true;
         }      
         if (mouseDown && Greenfoot.mouseClicked(this)) {    
-            //setImage(button_1);    
             mouseDown = false; // and here  
-            //add also the methods you want to execute here;    
         }  
         if (!mouseOver && Greenfoot.mouseMoved(this))  
         {  
-            //setImage("Start/2.png");  
             mouseOver = true;
             draw(text, 20, Color.RED, new Color(0, 0, 0, 0));
         }  
         if (mouseOver && Greenfoot.mouseMoved(null) && ! Greenfoot.mouseMoved(this))  
         {  
-            //setImage("Start/1.png");  
             mouseOver = false;  
             draw(text, 20, Color.BLACK, new Color(0, 0, 0, 0));
         }                

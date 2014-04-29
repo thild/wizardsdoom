@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Entity here.
+ * Base class for all game entities 
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -9,7 +9,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class Entity extends Actor
 {
 
+    /**
+     * Initial entity location
+     */
     private Location initialLocation;
+    
+    /**
+     * Sprite sheet file
+     */
     private String spriteSheet = "sprites.png";
 
     public void act() {
@@ -17,7 +24,6 @@ public abstract class Entity extends Actor
             setInitialLocation(getLocation());
         }    
     }
-    
     
     /**
      * This will return an object intersecting with the coloured part of your image.

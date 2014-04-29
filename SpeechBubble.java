@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
 
 /**
- * Write a description of class SpeechBubble here.
+ * Simple speech bubble notification.
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -20,14 +20,9 @@ public class SpeechBubble extends Actor
         setImage(gi);  
     }
     
-    public void hide() {
-        World w = getWorld();  
-        w.removeObject(this);  
+    public void act() {
+        if (Greenfoot.mouseClicked(this)) {    
+            getWorld().removeObject(this);  
+        }  
     }
-    
-    /*
- MouseInfo mouse = Greenfoot.getMouseInfo();
-        if(mouse==null) return;
-        if(mouse.getActor()==this && mouse.getButton()==1) getWorld().removeObject(this);       
-       */
 }

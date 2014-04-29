@@ -2,24 +2,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class NonPlayerCharacter here.
+ * NPC class
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
 public abstract class NonPlayerCharacter extends Character
 {
-    
+    /**
+     * For ramdom move
+     */
     private int moveRadius;
-    private int direction;
-    
-    private List<Integer> eastSprites = new ArrayList<Integer>();
-    private List<Integer> westSprites = new ArrayList<Integer>();
-    private List<Integer> northSprites = new ArrayList<Integer>();
-    private List<Integer> southSprites = new ArrayList<Integer>();
-    
-    
-    private int animationSprite = 0;
     
     protected static final int EAST = 0;
     protected static final int WEST = 1;
@@ -30,16 +23,6 @@ public abstract class NonPlayerCharacter extends Character
         super.act();
     }
     
-    protected int getDirection() {
-        return direction;
-    }
-
-    protected void setDirection(int direction) {
-        this.direction = direction;
-        resetAnimation();
-    }
-
-
     protected int getMoveRadius() {
         return this.moveRadius;
     }
@@ -48,35 +31,6 @@ public abstract class NonPlayerCharacter extends Character
         this.moveRadius = moveRadius;
     }    
     
-   
-    protected void setEastSprites(int begin, int end) {
-        eastSprites.clear();
-        for(int i = begin; i <= end; ++i) {
-            eastSprites.add(i);
-        }
-    }
-    
-    protected void setWestSprites(int begin, int end) {
-        westSprites.clear();
-        for(int i = begin; i <= end; ++i) {
-            westSprites.add(i);
-        }
-    }
-    
-    protected void setNorthSprites(int begin, int end) {
-        northSprites.clear();
-        for(int i = begin; i <= end; ++i) {
-            northSprites.add(i);
-        }
-    }
-    
-    
-    protected void setSouthSprites(int begin, int end) {
-        southSprites.clear();
-        for(int i = begin; i <= end; ++i) {
-            southSprites.add(i);
-        }
-    }    
     /**
      * Test if we can move forward. Return true if we can, false otherwise.
      */
@@ -152,48 +106,6 @@ public abstract class NonPlayerCharacter extends Character
                     setLocation(getX() - (getSpeed() / 10), getY());
                     break;
             }        
-        }
-    }
-    
-    private int animationFrame = 0;
-    
-    protected void resetAnimation() {
-        animationFrame = 0;
-        animationSprite = 0;
-        switch(getDirection()) {
-            case SOUTH :
-                setSprite(southSprites.get(0));
-                break;
-            case EAST :
-                setSprite(eastSprites.get(0));
-                break;
-            case NORTH :
-                setSprite(northSprites.get(0));
-                break;
-            case WEST :
-                setSprite(westSprites.get(0));
-                break;
-        }
-    }
-    
-    protected void animate() {
-        if((++animationFrame % 6) == 0) 
-        {
-            switch(getDirection()) {
-                case SOUTH :
-                    setSprite(southSprites.get(animationSprite++ % southSprites.size()));
-                    break;
-                case EAST :
-                    setSprite(eastSprites.get(animationSprite++ % eastSprites.size()));
-                    break;
-                case NORTH :
-                    setSprite(northSprites.get(animationSprite++ % northSprites.size()));
-                    break;
-                case WEST :
-                    setSprite(westSprites.get(animationSprite++ % westSprites.size()));
-                    break;
-            }
-            animationFrame = 0;
         }
     }
     
