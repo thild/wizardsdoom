@@ -58,18 +58,21 @@ public class Dialogue
                 
     }
     
-     // Variables declaration - do not modify                     
+    // Variables declaration - do not modify                     
     private javax.swing.JPanel answer;
     private javax.swing.JLabel answer1;
     private javax.swing.JLabel answer2;
     private javax.swing.JLabel answer3;
+    private javax.swing.JRadioButton answer4;
+    private javax.swing.JRadioButton answer5;
+    private javax.swing.JButton exit;
     private javax.swing.JPanel images;
     private ImagePanel npc;
     private javax.swing.JPanel panel;
     private ImagePanel pc;
     private javax.swing.JPanel question;
     private javax.swing.JLabel questionLabel;
-    // End of variables declaration             
+    // End of variables declaration              
     private LayoutManager layoutManager;
     
     private void initComponents() {
@@ -87,10 +90,12 @@ public class Dialogue
         answer1 = new javax.swing.JLabel();
         answer2 = new javax.swing.JLabel();
         answer3 = new javax.swing.JLabel();
+        answer4 = new javax.swing.JRadioButton();
+        answer5 = new javax.swing.JRadioButton();
+        exit = new javax.swing.JButton();
 
 
-        panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panel.setLayout(new java.awt.GridLayout(3, 1));
+        panel.setLayout(new java.awt.GridLayout(4, 1));
 
         images.setLayout(new java.awt.GridLayout(1, 2));
 
@@ -98,11 +103,11 @@ public class Dialogue
         npc.setLayout(npcLayout);
         npcLayout.setHorizontalGroup(
             npcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
         npcLayout.setVerticalGroup(
             npcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 93, Short.MAX_VALUE)
+            .addGap(0, 91, Short.MAX_VALUE)
         );
 
         images.add(npc);
@@ -111,11 +116,11 @@ public class Dialogue
         pc.setLayout(pcLayout);
         pcLayout.setHorizontalGroup(
             pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
         pcLayout.setVerticalGroup(
             pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 93, Short.MAX_VALUE)
+            .addGap(0, 91, Short.MAX_VALUE)
         );
 
         images.add(pc);
@@ -134,39 +139,89 @@ public class Dialogue
         answer.setLayout(new javax.swing.BoxLayout(answer, javax.swing.BoxLayout.PAGE_AXIS));
 
         answer1.setText("Ankara");
-        answer1.setName("answer1");
+        answer1.setName("answer1"); // NOI18N
         answer1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                answerMouseClicked(evt);
+                answer1MouseClicked(evt);
             }
         });
         answer.add(answer1);
 
         answer2.setText("Instanbul");
-        answer2.setName("answer2");
+        answer2.setName("answer2"); // NOI18N
         answer2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                answerMouseClicked(evt);
+                answer2MouseClicked(evt);
             }
         });
         answer.add(answer2);
 
         answer3.setText("Izmir");
-        answer3.setName("answer3");
+        answer3.setName("answer3"); // NOI18N
         answer3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                answerMouseClicked(evt);
+                answer3MouseClicked(evt);
             }
-        });        
+        });
         answer.add(answer3);
 
+        answer4.setText("Ahgof");
+        answer4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answer4ActionPerformed(evt);
+            }
+        });
+        answer.add(answer4);
+
+        answer5.setText("Mordor");
+        answer5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answer5ActionPerformed(evt);
+            }
+        });
+        answer.add(answer5);
+
         panel.add(answer);
-        
+
+        exit.setText("exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
+        panel.add(exit);        
         canvas.add(panel);
         canvas.updateUI();
 
     }
    
+    private void answer1MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        // TODO add your handling code here:
+        System.out.println(evt.getComponent().getName() + "clicked!"); 
+    }                                    
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // TODO add your handling code here:
+        System.out.println("Exiting dialogue!"); 
+        dispose();
+
+    }                                    
+
+    private void answer2MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        // TODO add your handling code here:
+    }                                    
+
+    private void answer3MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        // TODO add your handling code here:
+    }                                    
+
+    private void answer4ActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
+
+    private void answer5ActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }      
 
      private void answerMouseClicked(java.awt.event.MouseEvent evt) {                                     
         // TODO add your handling code here:
@@ -192,6 +247,10 @@ public class Dialogue
         canvas.remove(panel);
         canvas.setLayout(layoutManager);
         canvas.updateUI();
+        canvas.requestFocus();
+        SoundManager.stopSound("dialogue.mp3");
+        Greenfoot.setWorld(world);
+        SoundManager.playSound("outside.mp3", true);        
     }
 
 }

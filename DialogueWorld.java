@@ -29,13 +29,14 @@ public class DialogueWorld extends World
 
     
     public void act() {
-    
+        /*
         if(Greenfoot.isKeyDown("escape")) {
             dialogue.dispose();
             SoundManager.stopSound("dialogue.mp3");
             Greenfoot.setWorld(world);
             SoundManager.playSound("outside.mp3", true);
         }
+        */
     }
     
         
