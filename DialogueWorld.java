@@ -22,15 +22,21 @@ public class DialogueWorld extends World
         super(800, 600, 1); 
         this.world = world;
         this.dialogue = new Dialogue(world);
+        SoundManager.stopSound("outside.mp3");
+        SoundManager.playSound("dialogue.mp3", true);
+
     }
 
     
     public void act() {
     
         if(Greenfoot.isKeyDown("escape")) {
-            Greenfoot.setWorld(world);
             dialogue.dispose();
+            SoundManager.stopSound("dialogue.mp3");
+            Greenfoot.setWorld(world);
+            SoundManager.playSound("outside.mp3", true);
         }
     }
     
+        
 }

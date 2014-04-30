@@ -170,6 +170,9 @@ public class Dialogue
 
      private void answerMouseClicked(java.awt.event.MouseEvent evt) {                                     
         // TODO add your handling code here:
+        if (evt.getComponent().getName() != "answer1") {
+            SoundManager.playSound("donkey.mp3");
+        }
         System.out.println(evt.getComponent().getName() + " clicked!"); 
     }    
     

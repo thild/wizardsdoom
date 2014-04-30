@@ -18,30 +18,17 @@ public abstract class Entity extends Actor
      * Sprite sheet file
      */
     private String spriteSheet = "sprites.png";
+    
+    /**
+     * Sprite block size.
+     */
+    private int blockSize = 32;
 
     public void act() {
         if(getInitialLocation() == null) {
             setInitialLocation(getLocation());
         }    
     }
-    
-    /**
-     * This will return an object intersecting with the coloured part of your image.
-     */
-    public Actor getAnIntersectingObject(Class clss) {
-        GreenfootImage img = getImage();
-        Actor actor = null;
-        for(int x = 0; x<img.getWidth(); x++) {
-            for(int y = 0; y<img.getHeight(); y++) {
-                if(img.getColorAt(x, y).getAlpha()>0) {
-                    if(getOneObjectAtOffset(x-img.getWidth()/2, y-img.getHeight()/2, clss)!=null) {
-                        actor = getOneObjectAtOffset(x-img.getWidth()/2, y-img.getHeight()/2, clss);
-                    }
-                }
-            }
-        }
-        return actor;
-    }    
     
     protected void setSpriteSheet(String spriteSheet) {
         this.spriteSheet = spriteSheet;
@@ -50,13 +37,21 @@ public abstract class Entity extends Actor
     protected String getSpriteSheet() {
         return this.spriteSheet;
     }
-    
-    protected void setSprite(int id) {
-        setImage(SpriteSheetManager.getSprite(spriteSheet, id, 32));
+
+    protected void setBlockSize(int blockSize) {
+        this.blockSize = blockSize;
     }
     
-    protected void setSprite(String spriteSheet, int id) {
-        setImage(SpriteSheetManager.getSprite(spriteSheet, id, 32));
+    protected int getBlockSize() {
+        return this.blockSize;
+    }
+    
+    protected void setSprite(int id) {
+        setImage(SpriteSheetManager.getSprite(spriteSheet, id, blockSize));
+    }
+    
+    protected void setSprite(String spriteSheet, int id, int blockSize) {
+        setImage(SpriteSheetManager.getSprite(spriteSheet, id, blockSize));
     }
     
     public Location getLocation() {

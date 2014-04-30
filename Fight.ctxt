@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=world
+comment0.target=Fight(WizardWorld)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Dialog\n
+comment1.params=
+comment1.target=void\ initComponents()
+comment2.params=evt
+comment2.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment3.params=evt
+comment3.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment4.params=evt
+comment4.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment5.params=evt
+comment5.target=void\ answerMouseClicked(java.awt.event.MouseEvent)
+comment6.params=
+comment6.target=void\ dispose()
+comment6.text=\n\ \ \ \ private\ void\ exitActionPerformed(java.awt.event.ActionEvent\ evt)\ {\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \n\ \ \ \ \ \ \ \ //\ TODO\ add\ your\ handling\ code\ here\:\n\ \ \ \ \ \ \ \ dispose();\n\ \ \ \ \ \ \ \ Greenfoot.setWorld(world);\n\ \ \ \ \ \ \ \ Simulation.getInstance().setEnabled(false);\n\n\ \ \ \ }\ \ \ \n
+numComments=7

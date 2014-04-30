@@ -9,6 +9,8 @@ import greenfoot.core.WorldHandler;
 public class WizardWorld extends World
 {
 
+    private GreenfootSound music;
+    
     /**
      * Constructor for objects of class WizardWorld.
      * 
@@ -26,8 +28,19 @@ public class WizardWorld extends World
         }
         
         populate();
+        
     }
     
+    public void started() {
+        super.started();
+        SoundManager.playSound("outside.mp3", true);
+    }
+    
+    public void stopped() {
+        SoundManager.stopSound("outside.mp3");
+    }
+    
+   
     /**
      * Populate the world with a fixed scenario of Knights and Wizards.
      */    

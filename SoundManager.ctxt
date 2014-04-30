@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=soundFile
+comment0.target=void\ playSound(java.lang.String)
+comment0.text=\n\ Sound\ files\ must\ be\ of\ type\ mp3\ and\ must\ be\ located\ in\ "sounds"\ folder\n
+comment1.params=soundFile\ loop
+comment1.target=void\ playSound(java.lang.String,\ boolean)
+comment2.params=soundFile\ loop
+comment2.target=void\ playSoundInternal(java.lang.String,\ boolean)
+comment3.params=soundFile
+comment3.target=void\ stopSound(java.lang.String)
+numComments=4
