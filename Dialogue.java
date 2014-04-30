@@ -24,6 +24,10 @@ public class Dialogue
     {
         this.world = world;
         initComponents();
+        
+        npc.setImage("./images/wizard.jpg");
+        pc.setImage("./images/knight.jpg");
+        
         /*
             final JPanel panel = WorldHandler.getInstance().getWorldCanvas();  
             //panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -54,18 +58,17 @@ public class Dialogue
                 
     }
     
-   // Variables declaration - do not modify                     
+     // Variables declaration - do not modify                     
+    private javax.swing.JPanel answer;
     private javax.swing.JLabel answer1;
     private javax.swing.JLabel answer2;
     private javax.swing.JLabel answer3;
-    private javax.swing.JPanel answers;
-    private javax.swing.JButton exit;
-    private javax.swing.JPanel npc;
+    private javax.swing.JPanel images;
+    private ImagePanel npc;
     private javax.swing.JPanel panel;
-    private javax.swing.JPanel pc;
-    private javax.swing.JPanel pictures;
+    private ImagePanel pc;
     private javax.swing.JPanel question;
-    private javax.swing.JLabel questionText;
+    private javax.swing.JLabel questionLabel;
     // End of variables declaration             
     private LayoutManager layoutManager;
     
@@ -74,90 +77,104 @@ public class Dialogue
         layoutManager = canvas.getLayout();
         canvas.setLayout(new javax.swing.BoxLayout(canvas, javax.swing.BoxLayout.LINE_AXIS));
         
-        panel = new javax.swing.JPanel();
-        
+       panel = new javax.swing.JPanel();
+        images = new javax.swing.JPanel();
+        npc = new ImagePanel();
+        pc = new ImagePanel();
         question = new javax.swing.JPanel();
-        pictures = new javax.swing.JPanel();
-        pc = new javax.swing.JPanel();
-        npc = new javax.swing.JPanel();
-        questionText = new javax.swing.JLabel();
-        answers = new javax.swing.JPanel();
+        questionLabel = new javax.swing.JLabel();
+        answer = new javax.swing.JPanel();
         answer1 = new javax.swing.JLabel();
         answer2 = new javax.swing.JLabel();
         answer3 = new javax.swing.JLabel();
-        exit = new javax.swing.JButton();
 
+
+        panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setLayout(new java.awt.GridLayout(3, 1));
 
-        question.setLayout(new java.awt.GridLayout(2, 1));
-
-        pictures.setLayout(new java.awt.GridLayout(1, 2));
-
-        javax.swing.GroupLayout pcLayout = new javax.swing.GroupLayout(pc);
-        pc.setLayout(pcLayout);
-        pcLayout.setHorizontalGroup(
-            pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
-        );
-        pcLayout.setVerticalGroup(
-            pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 71, Short.MAX_VALUE)
-        );
-
-        pictures.add(pc);
+        images.setLayout(new java.awt.GridLayout(1, 2));
 
         javax.swing.GroupLayout npcLayout = new javax.swing.GroupLayout(npc);
         npc.setLayout(npcLayout);
         npcLayout.setHorizontalGroup(
             npcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
+            .addGap(0, 190, Short.MAX_VALUE)
         );
         npcLayout.setVerticalGroup(
             npcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 71, Short.MAX_VALUE)
+            .addGap(0, 93, Short.MAX_VALUE)
         );
 
-        pictures.add(npc);
+        images.add(npc);
 
-        question.add(pictures);
+        javax.swing.GroupLayout pcLayout = new javax.swing.GroupLayout(pc);
+        pc.setLayout(pcLayout);
+        pcLayout.setHorizontalGroup(
+            pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+        pcLayout.setVerticalGroup(
+            pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 93, Short.MAX_VALUE)
+        );
 
-        questionText.setText("jLabel1");
-        question.add(questionText);
+        images.add(pc);
+
+        panel.add(images);
+
+        question.setAutoscrolls(true);
+        question.setLayout(new javax.swing.BoxLayout(question, javax.swing.BoxLayout.LINE_AXIS));
+
+        questionLabel.setText("What's the capital of Turkey?");
+        question.add(questionLabel);
 
         panel.add(question);
 
-        answers.setLayout(new javax.swing.BoxLayout(answers, javax.swing.BoxLayout.Y_AXIS));
+        answer.setAutoscrolls(true);
+        answer.setLayout(new javax.swing.BoxLayout(answer, javax.swing.BoxLayout.PAGE_AXIS));
 
-        answer1.setText("jLabel1");
+        answer1.setText("Ankara");
+        answer1.setName("answer1");
         answer1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.out.println("Answer choosed.");
+                answerMouseClicked(evt);
             }
         });
-        answers.add(answer1);
+        answer.add(answer1);
 
-        answer2.setText("jLabel2");
-        answers.add(answer2);
-
-        answer3.setText("jLabel3");
-        answers.add(answer3);
-
-        panel.add(answers);
-
-        exit.setText("Exit");
-        /*
-        exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
+        answer2.setText("Instanbul");
+        answer2.setName("answer2");
+        answer2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                answerMouseClicked(evt);
             }
-        });*/
-        panel.add(exit);
+        });
+        answer.add(answer2);
+
+        answer3.setText("Izmir");
+        answer3.setName("answer3");
+        answer3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                answerMouseClicked(evt);
+            }
+        });        
+        answer.add(answer3);
+
+        panel.add(answer);
         
         canvas.add(panel);
         canvas.updateUI();
 
     }
+   
+
+     private void answerMouseClicked(java.awt.event.MouseEvent evt) {                                     
+        // TODO add your handling code here:
+        System.out.println(evt.getComponent().getName() + " clicked!"); 
+    }    
     
+    
+    /*
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {                                     
         // TODO add your handling code here:
         dispose();
@@ -165,7 +182,8 @@ public class Dialogue
         Simulation.getInstance().setEnabled(false);
 
     }   
-    
+    */
+   
     public void dispose() {
         final JPanel canvas = WorldHandler.getInstance().getWorldCanvas();
         canvas.remove(panel);

@@ -62,6 +62,9 @@ public abstract class PlayerCharacter extends Character
     }
    
     public void move() {
+        
+        if(isFrozen()) return;
+        
         if(Greenfoot.isKeyDown("up"))
         {
             if (getDirection() != NORTH) {

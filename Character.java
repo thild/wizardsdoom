@@ -35,6 +35,9 @@ public abstract class Character extends Entity
     private boolean frozen = false;
     private boolean dialoguing = false;
     
+    public void act() {
+    }
+    
     protected int getDirection() {
         return direction;
     }
@@ -153,6 +156,18 @@ public abstract class Character extends Entity
     }
     
     public abstract void interact(Character c);
+    
+   /**
+     * Test if we can move forward. Return true if we can, false otherwise.
+     */
+    protected boolean hasAnyoneNear(int range)
+    {
+        List objects = getObjectsInRange(range, null);
+        if(objects.isEmpty()) {
+            return true;
+        }
+        return false;
+    }      
     
     protected void resetAnimation() {
         animationFrame = 0;

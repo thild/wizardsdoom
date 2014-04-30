@@ -30,38 +30,6 @@ public class Knight extends PlayerCharacter
         interact();
     }    
     
-    public void move() {
-        if(isFrozen()) return;
-        if(Greenfoot.isKeyDown("up"))
-        {
-            if (getDirection() != NORTH) {
-                setDirection(NORTH);
-            }
-            super.move();
-        }
-        else if(Greenfoot.isKeyDown("down"))
-        {
-            if (getDirection() != SOUTH) {
-                setDirection(SOUTH);
-            }
-            super.move();
-        }
-        else if(Greenfoot.isKeyDown("left"))
-        {
-            if (getDirection() != WEST) {
-                setDirection(WEST);
-            }
-            super.move();
-        }
-        else if(Greenfoot.isKeyDown("right"))
-        { 
-            if (getDirection() != EAST) {
-                setDirection(EAST);
-            }
-            super.move();
-        }
-    }    
-    
     public void interact() {
         if(Greenfoot.isKeyDown("space")) {
             NonPlayerCharacter wizard = (NonPlayerCharacter)getOneIntersectingObject(Wizard.class);

@@ -14,11 +14,6 @@ public abstract class NonPlayerCharacter extends Character
      */
     private int moveRadius;
     
-    protected static final int EAST = 0;
-    protected static final int WEST = 1;
-    protected static final int NORTH = 2;
-    protected static final int SOUTH = 3;    
-    
     public void act() {
         super.act();
     }
@@ -68,6 +63,8 @@ public abstract class NonPlayerCharacter extends Character
         
      
         return true;
+        
+
     }    
     
     /**
@@ -91,7 +88,7 @@ public abstract class NonPlayerCharacter extends Character
             setDirection(newDirection);
         }        
         else {
-            animate();
+            animate(); 
             switch(getDirection()) {
                 case SOUTH :
                     setLocation(getX(), getY() + (getSpeed() / 10));
