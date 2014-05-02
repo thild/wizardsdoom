@@ -30,6 +30,8 @@ public class Knight extends PlayerCharacter
         interact();
     }    
     
+    private boolean tDown = false;
+    
     public void interact() {
         if(Greenfoot.isKeyDown("space")) {
             NonPlayerCharacter wizard = (NonPlayerCharacter)getOneIntersectingObject(Wizard.class);
@@ -37,7 +39,17 @@ public class Knight extends PlayerCharacter
                 interact(wizard);
             }        
         }
-        
+        WizardWorld w = (WizardWorld)getWorld();
+        if(!tDown && Greenfoot.isKeyDown("t") && !isSpeaking()) {
+            speak("teste");
+            tDown = true;        }
+        else if(!tDown && Greenfoot.isKeyDown("t") && isSpeaking()) {
+            stopSpeak();
+            tDown = true;
+        }
+        else if (tDown && !Greenfoot.isKeyDown("t")) {
+            tDown = false;
+        }
     }
     
     public void interact(Character c) {

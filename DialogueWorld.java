@@ -19,7 +19,7 @@ public class DialogueWorld extends World
     public DialogueWorld(WizardWorld world)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(800, 600, 1); 
+        super(672, 525, 1); 
         this.world = world;
         this.dialogue = new Dialogue(world);
         SoundManager.stopSound("outside.mp3");

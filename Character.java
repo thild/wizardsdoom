@@ -34,6 +34,10 @@ public abstract class Character extends Entity
     
     private boolean frozen = false;
     private boolean dialoguing = false;
+    private boolean speaking = false;
+    
+    SpeechBubble speechBubble;
+
     
     public void act() {
     }
@@ -150,9 +154,26 @@ public abstract class Character extends Entity
         this.power = power;
     }
     
-    protected void createSpeechBubble(String text) {
-        SpeechBubble sb = new SpeechBubble(text);
-        getWorld().addObject(sb,this.getX() + 50,this.getY() - 50);
+    protected void speak(String text) {
+        if (speechBubble == null) {
+            speechBubble = new SpeechBubble(this, text);
+            getWorld().addObject(speechBubble, 
+                                 this.getX() + 50, 
+                                 this.getY() - 50);
+        }
+        speaking = true;
+    }
+    
+    public boolean isSpeaking() {
+        return this.speaking;
+    }
+    
+    protected void stopSpeak() {
+        if (speechBubble != null) {
+            getWorld().removeObject(speechBubble);
+            speechBubble = null;
+        }
+        speaking = false;
     }
     
     public abstract void interact(Character c);

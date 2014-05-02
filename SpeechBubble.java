@@ -10,11 +10,14 @@ import java.awt.Color;
 public class SpeechBubble extends Actor
 {
 
+    private Character character;
+    
     /**
      * Constructor for objects of class SpeechBubble
      */
-    public SpeechBubble(String text)  
+    public SpeechBubble(Character character, String text)  
     {  
+        this.character = character;
         GreenfootImage gi = new greenfoot.GreenfootImage("speech-bubble.png");  
         gi.drawString(text, 20, 30);  
         setImage(gi);  
@@ -22,7 +25,8 @@ public class SpeechBubble extends Actor
     
     public void act() {
         if (Greenfoot.mouseClicked(this)) {    
-            getWorld().removeObject(this);  
+            character.stopSpeak();  
         }  
+        setLocation(character.getX() + 50, character.getY() - 50);
     }
 }

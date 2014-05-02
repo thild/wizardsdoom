@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class Entity extends Actor
 {
 
+
     /**
      * Initial entity location
      */
@@ -23,7 +24,7 @@ public abstract class Entity extends Actor
      * Sprite block size.
      */
     private int blockSize = 32;
-
+    
     public void act() {
         if(getInitialLocation() == null) {
             setInitialLocation(getLocation());

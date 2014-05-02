@@ -65,6 +65,7 @@ public class Dialogue
     private javax.swing.JLabel answer3;
     private javax.swing.JRadioButton answer4;
     private javax.swing.JRadioButton answer5;
+    private javax.swing.JPanel controls;
     private javax.swing.JButton exit;
     private javax.swing.JPanel images;
     private ImagePanel npc;
@@ -72,7 +73,7 @@ public class Dialogue
     private ImagePanel pc;
     private javax.swing.JPanel question;
     private javax.swing.JLabel questionLabel;
-    // End of variables declaration              
+    // End of variables declaration      
     private LayoutManager layoutManager;
     
     private void initComponents() {
@@ -92,9 +93,15 @@ public class Dialogue
         answer3 = new javax.swing.JLabel();
         answer4 = new javax.swing.JRadioButton();
         answer5 = new javax.swing.JRadioButton();
+        controls = new javax.swing.JPanel();
         exit = new javax.swing.JButton();
 
 
+        panel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                panelKeyPressed(evt);
+            }
+        });
         panel.setLayout(new java.awt.GridLayout(4, 1));
 
         images.setLayout(new java.awt.GridLayout(1, 2));
@@ -142,7 +149,7 @@ public class Dialogue
         answer1.setName("answer1"); // NOI18N
         answer1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                answer1MouseClicked(evt);
+                answerMouseClicked(evt);
             }
         });
         answer.add(answer1);
@@ -151,7 +158,7 @@ public class Dialogue
         answer2.setName("answer2"); // NOI18N
         answer2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                answer2MouseClicked(evt);
+                answerMouseClicked(evt);
             }
         });
         answer.add(answer2);
@@ -160,7 +167,7 @@ public class Dialogue
         answer3.setName("answer3"); // NOI18N
         answer3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                answer3MouseClicked(evt);
+                answerMouseClicked(evt);
             }
         });
         answer.add(answer3);
@@ -189,17 +196,30 @@ public class Dialogue
                 exitActionPerformed(evt);
             }
         });
-        panel.add(exit);        
+
+        javax.swing.GroupLayout controlsLayout = new javax.swing.GroupLayout(controls);
+        controls.setLayout(controlsLayout);
+        controlsLayout.setHorizontalGroup(
+            controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlsLayout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        controlsLayout.setVerticalGroup(
+            controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlsLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panel.add(controls);
+        
+        
         canvas.add(panel);
         canvas.updateUI();
 
     }
    
-    private void answer1MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        // TODO add your handling code here:
-        System.out.println(evt.getComponent().getName() + "clicked!"); 
-    }                                    
-
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {                                     
         // TODO add your handling code here:
         System.out.println("Exiting dialogue!"); 
@@ -207,14 +227,7 @@ public class Dialogue
 
     }                                    
 
-    private void answer2MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        // TODO add your handling code here:
-    }                                    
-
-    private void answer3MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        // TODO add your handling code here:
-    }                                    
-
+   
     private void answer4ActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
     }                                       
@@ -231,6 +244,10 @@ public class Dialogue
         System.out.println(evt.getComponent().getName() + " clicked!"); 
     }    
     
+    private void panelKeyPressed(java.awt.event.KeyEvent evt) {                                 
+        // TODO add your handling code here:
+        System.out.println(evt.getKeyChar()); 
+    }  
     
     /*
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {                                     

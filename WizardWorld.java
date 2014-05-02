@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import greenfoot.core.WorldHandler;  
+import greenfoot.core.WorldHandler; 
+ 
 /**
  * Write a description of class WizardWorld here.
  * 
