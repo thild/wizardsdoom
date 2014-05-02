@@ -18,18 +18,18 @@ public abstract class NonPlayerCharacter extends Character
         super.act();
     }
     
-    protected int getMoveRadius() {
+    public int getMoveRadius() {
         return this.moveRadius;
     }
     
-    protected void setMoveRadius(int moveRadius) {
+    public void setMoveRadius(int moveRadius) {
         this.moveRadius = moveRadius;
     }    
     
     /**
      * Test if we can move forward. Return true if we can, false otherwise.
      */
-    protected boolean canMove(int direction)
+    public boolean canMove(int direction)
     {
         Location iLocation = getInitialLocation();
         World myWorld = getWorld();
@@ -70,7 +70,7 @@ public abstract class NonPlayerCharacter extends Character
     /**
      * Test if we can move forward. Return true if we can, false otherwise.
      */
-    protected boolean canMove()
+    public boolean canMove()
     {
         return canMove(this.getDirection());
     }

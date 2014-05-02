@@ -18,7 +18,7 @@ public abstract class PlayerCharacter extends Character
     /**
      * Test if we can move forward. Return true if we can, false otherwise.
      */
-    protected boolean canMove(int direction)
+    public boolean canMove(int direction)
     {
         World myWorld = getWorld();
         int x = getX();
@@ -56,7 +56,7 @@ public abstract class PlayerCharacter extends Character
     /**
      * Test if we can move forward. Return true if we can, false otherwise.
      */
-    protected boolean canMove()
+    public boolean canMove()
     {
         return canMove(this.getDirection());
     }

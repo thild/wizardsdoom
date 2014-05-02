@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=scriptFile
+comment0.target=void\ evalFile(java.lang.String)
+comment1.params=script
+comment1.target=void\ eval(java.lang.String)
+comment2.params=scriptFile\ function\ args
+comment2.target=void\ invokeFunction(java.lang.String,\ java.lang.String,\ java.lang.Object[])
+numComments=3

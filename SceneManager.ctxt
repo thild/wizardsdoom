@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=
+comment0.target=SceneManager()
+comment1.params=
+comment1.target=SceneManager\ getInstance()
+comment2.params=name\ entity
+comment2.target=void\ addEntity(java.lang.String,\ Entity)
+comment3.params=name
+comment3.target=Entity\ getEntity(java.lang.String)
+numComments=4

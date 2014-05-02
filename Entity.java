@@ -31,27 +31,27 @@ public abstract class Entity extends Actor
         }    
     }
     
-    protected void setSpriteSheet(String spriteSheet) {
+    public void setSpriteSheet(String spriteSheet) {
         this.spriteSheet = spriteSheet;
     }
     
-    protected String getSpriteSheet() {
+    public String getSpriteSheet() {
         return this.spriteSheet;
     }
 
-    protected void setBlockSize(int blockSize) {
+    public void setBlockSize(int blockSize) {
         this.blockSize = blockSize;
     }
     
-    protected int getBlockSize() {
+    public int getBlockSize() {
         return this.blockSize;
     }
     
-    protected void setSprite(int id) {
+    public void setSprite(int id) {
         setImage(SpriteSheetManager.getSprite(spriteSheet, id, blockSize));
     }
     
-    protected void setSprite(String spriteSheet, int id, int blockSize) {
+    public void setSprite(String spriteSheet, int id, int blockSize) {
         setImage(SpriteSheetManager.getSprite(spriteSheet, id, blockSize));
     }
     

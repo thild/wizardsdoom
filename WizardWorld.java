@@ -29,7 +29,6 @@ public class WizardWorld extends World
         }
         
         populate();
-        
     }
     
     public void started() {

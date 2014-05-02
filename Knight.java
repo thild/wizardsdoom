@@ -15,6 +15,7 @@ public class Knight extends PlayerCharacter
         setEastSprites(24, 26);
         setNorthSprites(36, 38);
         setSpeed(20);
+        SceneManager.addEntity("knight", this);
     }
     
     /**
@@ -49,6 +50,9 @@ public class Knight extends PlayerCharacter
         }
         else if (tDown && !Greenfoot.isKeyDown("t")) {
             tDown = false;
+        }
+        if(Greenfoot.isKeyDown("j")) { 
+            ScriptManager.invokeFunction("knight.js", "saySomething", "teste");
         }
     }
     

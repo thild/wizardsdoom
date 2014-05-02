@@ -10,12 +10,12 @@ public class Wizard extends NonPlayerCharacter
 {
 
     public Wizard() {
-            setSprite(6); //initialSprite
-            setMoveRadius(0); //radius of movement
-            setSouthSprites(6, 8);
-            setWestSprites(18, 20);
-            setEastSprites(30, 32);
-            setNorthSprites(42, 44);
+        setSprite(6); //initialSprite
+        setMoveRadius(0); //radius of movement
+        setSouthSprites(6, 8);
+        setWestSprites(18, 20);
+        setEastSprites(30, 32);
+        setNorthSprites(42, 44);
     }
     
     /**

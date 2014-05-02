@@ -42,31 +42,31 @@ public abstract class Character extends Entity
     public void act() {
     }
     
-    protected int getDirection() {
+    public int getDirection() {
         return direction;
     }
 
-    protected void setDirection(int direction) {
+    public void setDirection(int direction) {
         this.direction = direction;
         resetAnimation();
     }
 
     
-    protected void setEastSprites(int begin, int end) {
+    public void setEastSprites(int begin, int end) {
         eastSprites.clear();
         for(int i = begin; i <= end; ++i) {
             eastSprites.add(i);
         }
     }
     
-    protected void setWestSprites(int begin, int end) {
+    public void setWestSprites(int begin, int end) {
         westSprites.clear();
         for(int i = begin; i <= end; ++i) {
             westSprites.add(i);
         }
     }
     
-    protected void setNorthSprites(int begin, int end) {
+    public void setNorthSprites(int begin, int end) {
         northSprites.clear();
         for(int i = begin; i <= end; ++i) {
             northSprites.add(i);
@@ -74,7 +74,7 @@ public abstract class Character extends Entity
     }
     
     
-    protected void setSouthSprites(int begin, int end) {
+    public void setSouthSprites(int begin, int end) {
         southSprites.clear();
         for(int i = begin; i <= end; ++i) {
             southSprites.add(i);
@@ -154,7 +154,7 @@ public abstract class Character extends Entity
         this.power = power;
     }
     
-    protected void speak(String text) {
+    public void speak(String text) {
         if (speechBubble == null) {
             speechBubble = new SpeechBubble(this, text);
             getWorld().addObject(speechBubble, 
@@ -168,7 +168,7 @@ public abstract class Character extends Entity
         return this.speaking;
     }
     
-    protected void stopSpeak() {
+    public void stopSpeak() {
         if (speechBubble != null) {
             getWorld().removeObject(speechBubble);
             speechBubble = null;
@@ -181,7 +181,7 @@ public abstract class Character extends Entity
    /**
      * Test if we can move forward. Return true if we can, false otherwise.
      */
-    protected boolean hasAnyoneNear(int range)
+    public boolean hasAnyoneNear(int range)
     {
         List objects = getObjectsInRange(range, null);
         if(objects.isEmpty()) {
@@ -190,7 +190,7 @@ public abstract class Character extends Entity
         return false;
     }      
     
-    protected void resetAnimation() {
+    public void resetAnimation() {
         animationFrame = 0;
         animationSprite = 0;
         switch(getDirection()) {
@@ -209,7 +209,7 @@ public abstract class Character extends Entity
         }
     }
     
-    protected void animate() {
+    public void animate() {
         if((++animationFrame % 6) == 0) 
         {
             switch(getDirection()) {
