@@ -15,7 +15,8 @@ public class Knight extends PlayerCharacter
         setEastSprites(24, 26);
         setNorthSprites(36, 38);
         setSpeed(20);
-        SceneManager.addEntity("knight", this);
+        setName("knight");
+        SceneManager.getInstance().addEntity(this);
     }
     
     /**
@@ -56,8 +57,11 @@ public class Knight extends PlayerCharacter
         }
     }
     
-    public void interact(Character c) {
-        Greenfoot.setWorld(new DialogueWorld((WizardWorld)getWorld()));
+    public void interact(Character npc) {
+        Dialogue dialogue = DialogueManager.getInstance().readDialogue("0002");
+        dialogue.setPc(this);
+        dialogue.setNpc(npc);
+        Greenfoot.setWorld(new DialogueWorld((WizardWorld)getWorld(), dialogue));
     }
     
 }

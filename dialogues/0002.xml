@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_51" class="java.beans.XMLDecoder">
+ <object class="Dialogue">
+  <void property="choices">
+   <void method="add">
+    <object class="Choice">
+     <void property="acceptFunction">
+      <string>choice1Accept</string>
+     </void>
+     <void property="conditionFunction">
+      <string>choice1Condition</string>
+     </void>
+     <void property="message">
+      <string>Ankara</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="Choice">
+     <void property="acceptFunction">
+      <string>choice2Accept</string>
+     </void>
+     <void property="conditionFunction">
+      <string>choice2Condition</string>
+     </void>
+     <void property="message">
+      <string>Instanbul</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="Choice">
+     <void property="acceptFunction">
+      <string>choice3Accept</string>
+     </void>
+     <void property="conditionFunction">
+      <string>choice3Condition</string>
+     </void>
+     <void property="message">
+      <string>Izmir</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="id">
+   <string>0002</string>
+  </void>
+  <void property="message">
+   <string>What&apos;s is the capital of Turkey?</string>
+  </void>
+  <void property="scriptFile">
+   <string>0002.js</string>
+  </void>
+ </object>
+</java>

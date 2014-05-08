@@ -112,6 +112,18 @@ public abstract class Character extends Entity
         this.speed += ammount;
     }
     
+    public void increaseHealth(int ammount) {
+        this.health += ammount;
+    }
+    
+    public void increasePower(int ammount) {
+        this.power += ammount;
+    }
+    
+    public void increaseStrength(int ammount) {
+        this.strength += ammount;
+    }
+    
     /**
      * @return the strength
      */

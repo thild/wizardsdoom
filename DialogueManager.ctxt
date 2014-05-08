@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=
+comment0.target=DialogueManager()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ DialogueManager\n
+comment1.params=
+comment1.target=DialogueManager\ getInstance()
+comment2.params=id
+comment2.target=Dialogue\ getDialogue(java.lang.String)
+comment3.params=id
+comment3.target=boolean\ isDialogueClosed(java.lang.String)
+comment4.params=id
+comment4.target=boolean\ openDialogue(java.lang.String)
+comment5.params=id
+comment5.target=boolean\ closeDialogue(java.lang.String)
+comment5.text=\n\ \ \ \ public\ DialogueWorld(WizardWorld\ world,\ Dialogue\ dialogue)\n\ \ \ \ {\ \ \ \ \n\ \ \ \ \ \ \ \ super(672,\ 525,\ 1);\ \n\ \ \ \ \ \ \ \ DialoguePanel\ dialoguePanel\ \=\ new\ DialoguePanel(world,\ dialogue);\n\ \ \ \ \ \ \ \ SoundManager.stopSound("outside.mp3");\n\ \ \ \ \ \ \ \ SoundManager.playSound("dialogue.mp3",\ true);\n\n\ \ \ \ }\ \ \ \ \n
+comment6.params=id
+comment6.target=Dialogue\ readDialogue(java.lang.String)
+comment7.params=dialogue
+comment7.target=void\ writeDialogue(Dialogue)
+numComments=8

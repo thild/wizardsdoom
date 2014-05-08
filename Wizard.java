@@ -16,6 +16,8 @@ public class Wizard extends NonPlayerCharacter
         setWestSprites(18, 20);
         setEastSprites(30, 32);
         setNorthSprites(42, 44);
+        setName("wizard");
+        SceneManager.getInstance().addEntity(this);
     }
     
     /**

@@ -25,12 +25,24 @@ public abstract class Entity extends Actor
      */
     private int blockSize = 32;
     
+    private String name;
+    
+    private static int count = 0;
+    
     public void act() {
         if(getInitialLocation() == null) {
             setInitialLocation(getLocation());
         }    
     }
+
+    public void setName(String name) {
+        this.name = name + ++count;
+    }
     
+    public String getName() {
+        return this.name;
+    }
+
     public void setSpriteSheet(String spriteSheet) {
         this.spriteSheet = spriteSheet;
     }

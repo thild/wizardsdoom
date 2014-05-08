@@ -1,0 +1,17 @@
+<dialogue id="0001" condition="!npc.carsFixed">
+  <message>Man, fix my car!</message>
+  <choices>
+    <choice condition="hero.carFixingSkill > 5" priority="7" id="Sure!">
+      <command>hero.carFixingSkills += 1</command>
+      <command>npc.carFixed = true</command>
+      <command>hero.playSmokeAnimation()</command>
+      <command>nextDialogue = 104</command>
+    </choice>
+    <choice condition="hero.carFixingSkill <= 5" id="I can't...">
+      <command>nextDialogue = 0001</command>
+    </choice>
+    <choice id="Fix it yourself">
+      <command>npc.likesHero -= 1</command>
+    </choice>
+  </choices>
+</dialogue> 

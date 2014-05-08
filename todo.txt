@@ -1,0 +1,12 @@
+- how to make a video game http://www.stormthecastle.com/video-game-design/video-game-design-FAQ.htm
+  http://www.howtomakeanrpg.com/
+
+- tilemap  (see http://gamedevelopment.tutsplus.com/articles/how-to-build-a-jrpg-a-primer-for-game-developers--gamedev-6676)
+  http://gamedevelopment.tutsplus.com/tutorials/introduction-to-tiled-map-editor--gamedev-2838
+  http://gamedevelopment.tutsplus.com/tutorials/parsing-tiled-tmx-format-maps-in-your-own-game-engine--gamedev-3104
+  http://www.tonypa.pri.ee/tbw/start.html
+  
+- OpenGameArt - http://opengameart.org/
+- Sprite sheets - http://graphicriver.net/collections/2584503-game-sprite-sheets
+
+- Scrolling? http://www.tonypa.pri.ee/tbw/tut13.html

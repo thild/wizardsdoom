@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Choice()
+comment1.params=
+comment1.target=java.lang.String\ getId()
+comment2.params=id
+comment2.target=void\ setId(java.lang.String)
+comment3.params=
+comment3.target=java.lang.String\ getMessage()
+comment4.params=message
+comment4.target=void\ setMessage(java.lang.String)
+comment5.params=
+comment5.target=java.lang.String\ getConditionFunction()
+comment6.params=conditionFunction
+comment6.target=void\ setConditionFunction(java.lang.String)
+comment7.params=
+comment7.target=java.lang.String\ getAcceptFunction()
+comment8.params=acceptFunction
+comment8.target=void\ setAcceptFunction(java.lang.String)
+numComments=9

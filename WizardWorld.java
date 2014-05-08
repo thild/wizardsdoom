@@ -9,7 +9,7 @@ import greenfoot.core.WorldHandler;
  */
 public class WizardWorld extends World
 {
-
+    //http://gamedevelopment.tutsplus.com/articles/how-to-build-a-jrpg-a-primer-for-game-developers--gamedev-6676
     private GreenfootSound music;
     
     /**
@@ -29,6 +29,23 @@ public class WizardWorld extends World
         }
         
         populate();
+        
+        /*
+        Dialogue d0002 = new Dialogue();
+        d0002.setId("0002");
+        d0002.setMessage("What's is the capital of Turkey");
+        //d0002.setPc("knight");
+        //d0002.setNpc("wizard");
+        Choice c = new Choice();
+        c.setMessage("Teste");
+        c.setConditionFunction("choice1Condition");
+        c.setAcceptFunction("choice1Accept");
+        d0002.getChoices().add(c); 
+        
+        Dialogue.writeDialogue(d0002);
+        d0002 = Dialogue.readDialogue("0002");
+        System.out.println(d0002.getMessage());
+        */
     }
     
     public void started() {

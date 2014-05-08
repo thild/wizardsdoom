@@ -78,6 +78,35 @@ public final class ScriptManager
             nsmEx.printStackTrace();
         }
     }
-    
+    /*
+    public static void invokeFunction(String scriptFile, String function, String name, Object... args) {
+        try{
+            FileReader fr = new FileReader("./scripts/" + scriptFile);
+            engine.put("name", name);
+            engine.eval(fr, bindings);
+            
+            // javax.script.Invocable is an optional interface.  
+            // Check whether your script engine implements or not!  
+            // Note that the JavaScript engine implements Invocable interface.  
+            Invocable inv = (Invocable) engine;  
+      
+            // invoke the global function named "hello"  
+            inv.invokeFunction(function, args);  
+            
+        }
+        catch(IOException ioEx)
+        {
+            ioEx.printStackTrace();
+        }
+        catch(ScriptException scrEx)
+        {
+            scrEx.printStackTrace();
+        }        
+        catch (NoSuchMethodException nsmEx) 
+        {
+            nsmEx.printStackTrace();
+        }
+    }
+    */
     
 }
