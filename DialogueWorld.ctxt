@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.params=world\ dialogue
-comment0.target=DialogueWorld(WizardWorld,\ Dialogue)
+comment0.params=dialogue
+comment0.target=DialogueWorld(Dialogue)
 comment0.text=\n\ Constructor\ for\ objects\ of\ class\ DialogueWorld.\n\ \n
 comment1.params=
-comment1.target=void\ act()
+comment1.target=DialoguePanel\ getDialoguePanel()
 numComments=2

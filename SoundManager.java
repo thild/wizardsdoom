@@ -1,49 +1,76 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * Write a description of class SoundManager here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This class manages all sounds in the game.
+ * See http://gamedevelopment.tutsplus.com/articles/how-to-build-a-jrpg-a-primer-for-game-developers--gamedev-6676 
+ * @author Tony Alexander Hild
+ * @version 0.1a
  */
 public final class SoundManager  
 {
-    
-    private static Map<String, GreenfootSound> sounds = new HashMap<String, GreenfootSound>();
 
     /**
-     * Sound files must be of type mp3 and must be located in "sounds" folder
+     * Sounds buffer.
      */
-    public static void playSound(String soundFile) {
-        playSoundInternal(soundFile, false);
+    private static Map<String, GreenfootSound> sounds = new HashMap<String, GreenfootSound>();
+    
+    /**
+     * Singleton object
+     */
+    private final static SoundManager instance = new SoundManager();
+    
+    private SoundManager(){}
+    
+    public static SoundManager getInstance() {
+        return instance;
     }
     
-    public static void playSound(String soundFile, boolean loop) {
-        playSoundInternal(soundFile, loop);
+    /**
+     * Play a sound. Sound files must be of type mp3 and must be located in "sounds" folder.
+     * @param sound is the name of mp3 file without extension.
+     */
+    public void playSound(String sound) {
+        playSoundInternal(sound, false);
+    }
+    
+    /**
+     * Play a sound with or without loop. Sound files must be of type mp3 and must be located in "sounds" folder.
+     * @param sound is the name of mp3 file without extension.
+     * @param loop indicates if sound must loop.
+     */
+    public void playSound(String sound, boolean loop) {
+        playSoundInternal(sound, loop);
     }
 
-    private static void playSoundInternal(String soundFile, boolean loop) {
-        GreenfootSound sound = sounds.get(soundFile);
-        if(sound == null) {
-            sound = new GreenfootSound(soundFile);
-            sounds.put(soundFile, sound);
+    /**
+     * Play a sound with or without loop. Sound files must be of type mp3 and must be located in "sounds" folder.
+     * @param sound is the name of mp3 file without extension.
+     * @param loop indicates if sound must loop.
+     */
+    private void playSoundInternal(String sound, boolean loop) {
+        GreenfootSound gfsound = sounds.get(sound); // try get sound from buffer
+        if(gfsound == null) { // if sound is null create new sound and add to buffer
+            gfsound = new GreenfootSound(sound + ".mp3");
+            sounds.put(sound, gfsound);
         }
         if (loop) {
-            sound.playLoop();
+            gfsound.playLoop(); // play with loop
         }
         else {
-            sound.play();
+            gfsound.play(); // play the sound
         }
     }
 
-    public static void stopSound(String soundFile) {
-        GreenfootSound sound = sounds.get(soundFile);
-        if(sound != null) {
-            sound.stop();
+    /**
+     * Stop playing a sound.
+     * @param sound is the name of mp3 file without extension.
+     */
+    public void stopSound(String sound) {
+        GreenfootSound gfsound = sounds.get(sound); // try get sound from buffer
+        if(gfsound != null) { //if sound is not null stop the sound
+            gfsound.stop();
         }
     }
-    
 }

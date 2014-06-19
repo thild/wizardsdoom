@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=value
+comment0.target=Direction(int)
+comment1.params=
+comment1.target=int\ getValue()
+comment2.params=direction
+comment2.target=Direction\ fromInt(int)
+numComments=3

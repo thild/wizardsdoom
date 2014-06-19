@@ -7,15 +7,20 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class NonPlayerCharacter extends Character
+public class NonPlayerCharacter extends Character
 {
     /**
      * For ramdom move
      */
     private int moveRadius;
     
+    public NonPlayerCharacter(String name) {
+        this.setName(name);
+    }
+    
     public void act() {
         super.act();
+        move();
     }
     
     public int getMoveRadius() {
@@ -29,10 +34,11 @@ public abstract class NonPlayerCharacter extends Character
     /**
      * Test if we can move forward. Return true if we can, false otherwise.
      */
-    public boolean canMove(int direction)
+    public boolean canMove(Direction direction)
     {
         Location iLocation = getInitialLocation();
-        World myWorld = getWorld();
+        int width = Game.getScene().getWidth();
+        int height = Game.getScene().getHeight();
         int x = getX();
         int y = getY();
         switch(direction) {
@@ -52,8 +58,8 @@ public abstract class NonPlayerCharacter extends Character
         
         int minX = moveRadius == 0 || iLocation.getX() - moveRadius < 0 ? 0 : iLocation.getX() - moveRadius;
         int minY = moveRadius == 0 || iLocation.getY() - moveRadius < 0 ? 0 : iLocation.getY() - moveRadius;
-        int maxX = moveRadius == 0 || iLocation.getX() + moveRadius > (myWorld.getWidth() - 1) ? myWorld.getWidth() - 1 : iLocation.getX() + moveRadius;
-        int maxY = moveRadius == 0 || iLocation.getY() + moveRadius > (myWorld.getHeight() - 1) ? myWorld.getHeight() - 1 : iLocation.getY() + moveRadius;
+        int maxX = moveRadius == 0 || iLocation.getX() + moveRadius > (width - 1) ? width - 1 : iLocation.getX() + moveRadius;
+        int maxY = moveRadius == 0 || iLocation.getY() + moveRadius > (height - 1) ? height - 1 : iLocation.getY() + moveRadius;
         
                                           
         if (x < minX || y < minY || x > maxX || y > maxY) 
@@ -76,14 +82,15 @@ public abstract class NonPlayerCharacter extends Character
     }
    
     public void move() {
+        if(isFrozen()) return;
         while(!canMove()) {
             turn();
             return;
         }          
         if(Greenfoot.getRandomNumber(1000) < 10) {
-            int newDirection = Greenfoot.getRandomNumber(4);
+            Direction newDirection = Direction.fromInt(Greenfoot.getRandomNumber(4));
             while(!canMove(newDirection)) {
-                newDirection = Greenfoot.getRandomNumber(4);
+                newDirection = Direction.fromInt(Greenfoot.getRandomNumber(4));
             }
             setDirection(newDirection);
         }        
@@ -110,16 +117,16 @@ public abstract class NonPlayerCharacter extends Character
     {
         switch(getDirection()) {
             case SOUTH :
-                setDirection(EAST);
+                setDirection(Direction.EAST);
                 break;
             case EAST :
-                setDirection(NORTH);
+                setDirection(Direction.NORTH);
                 break;
             case NORTH :
-                setDirection(WEST);
+                setDirection(Direction.WEST);
                 break;
             case WEST :
-                setDirection(SOUTH);
+                setDirection(Direction.SOUTH);
                 break;
         }
     }    

@@ -1,0 +1,45 @@
+Class documentation
+<---- javadoc command: ---->
+/usr/java/jdk1.7.0_51/bin/javadoc
+-author
+-version
+-nodeprecated
+-protected
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+1.7
+-classpath
+/home/tony/tmp/greenfoot/lib/extensions/greenfoot.jar:/home/tony/tmp/greenfoot/lib/bluejcore.jar:/home/tony/tmp/greenfoot/lib/bluejeditor.jar:/home/tony/tmp/greenfoot/lib/bluejext.jar:/home/tony/tmp/greenfoot/lib/AppleJavaExtensions.jar:/home/tony/tmp/greenfoot/lib/junit-4.8.2.jar:/home/tony/tmp/greenfoot/lib/bluej.jar:/home/tony/tmp/greenfoot/lib/commons-httpclient-3.1.jar:/home/tony/tmp/greenfoot/lib/commons-logging-api-1.1.2.jar:/home/tony/tmp/greenfoot/lib/commons-codec-1.3.jar:/home/tony/tmp/greenfoot/lib/jl1.0.1.jar:/home/tony/tmp/greenfoot/lib/opencsv-2.3.jar:/home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom
+-d
+/home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc
+-encoding
+UTF-8
+-charset
+UTF-8
+-docletpath
+/home/tony/tmp/greenfoot/lib/bjdoclet.jar
+-doclet
+bluej.doclet.doclets.formats.html.HtmlDoclet
+/home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/Dialogue.java
+<---- end of javadoc command ---->
+Loading source file /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/Dialogue.java...
+Constructing Javadoc information...
+/home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/Dialogue.java:111: error: method addChoice(String) is already defined in class Dialogue
+   public Choice addChoice(String message) {
+                 ^
+Standard Doclet version 1.7.0_51
+Building tree for all the packages and classes...
+Generating /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc/Dialogue.html...
+Generating /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc/package-frame.html...
+Generating /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc/package-summary.html...
+Generating /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc/constant-values.html...
+Building index for all the packages and classes...
+Building index for all classes...
+Generating /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc/allclasses-frame.html...
+Generating /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc/allclasses-noframe.html...
+Generating /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc/index.html...
+Generating /home/tony/Dropbox/unicentro/disciplinas/2014/POOI/codigos/wizardsdoom/doc/stylesheet.css...
+1 warning

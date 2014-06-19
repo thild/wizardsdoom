@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=id\ interlocutor
+comment0.target=Dialogue\ initiateDialogueWith(java.lang.String,\ Character)
+comment1.params=dialogue\ interlocutor
+comment1.target=void\ addDialogue(Dialogue,\ Character)
+comment2.params=interlocutor
+comment2.target=Dialogue\ getCurrentDialogue(Character)
+comment3.params=interlocutor
+comment3.target=void\ closeCurrentDialogue(Character)
+numComments=4

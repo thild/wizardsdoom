@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=
+comment0.target=InventoryItem()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ InventoryItem\n
+comment1.params=name
+comment1.target=void\ setName(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=description
+comment3.target=void\ setDescription(java.lang.String)
+comment4.params=
+comment4.target=java.lang.String\ getDescription()
+comment5.params=sprite
+comment5.target=void\ setSprite(int)
+comment6.params=
+comment6.target=int\ getSprite()
+numComments=7

@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=boolean\ isInteractable()
+comment1.params=isInteractable
+comment1.target=void\ setInteractable(boolean)
+comment2.params=
+comment2.target=void\ interact()
+numComments=3

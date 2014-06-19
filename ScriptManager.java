@@ -1,33 +1,67 @@
 import javax.script.*;
 import java.io.*;
+import java.nio.file.*;
+import java.util.*;
+
 
 /**
- * Write a description of class ScriptManager here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This class manages all scripts in the game.
+ * See:
+ * http://www.ibm.com/developerworks/java/library/j-5things9/index.html
+ * http://www.coderanch.com/t/549722/java/java/Calling-Javascript-function-Java-Code
+ * http://www.mytechnotes.biz/2013/04/calling-javascript-from-java-example.html
+ * TODO: create a context for each script file or call a method from an object in javascript
+ * http://docs.oracle.com/javase/7/docs/technotes/guides/scripting/programmer_guide/
+ * @author Tony Alexander Hild
+ * @version 0.1a
  */
 public final class ScriptManager  
 {
-    //http://www.ibm.com/developerworks/java/library/j-5things9/index.html
-    //http://www.coderanch.com/t/549722/java/java/Calling-Javascript-function-Java-Code
-    //http://www.mytechnotes.biz/2013/04/calling-javascript-from-java-example.html
-    private static ScriptEngine engine = new ScriptEngineManager().getEngineByName("javascript");
-    private static Bindings bindings;
+    /**
+     * We need only one script engine.
+     */
+    private static ScriptEngine engine;
+    
+    private static Map<String, Long> scriptModifiedStatus = new HashMap<String, Long>();
+
+    //private static Bindings bindings;
 
     /**
-     * Constructor for objects of class ScriptManager
+     * Static constructor
      */
     static 
     {
-        bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("sceneManager", SceneManager.getInstance());
+        Thread.currentThread().setContextClassLoader(bluej.runtime.ExecServer.getCurrentClassLoader());
+        engine = new ScriptEngineManager().getEngineByName("javascript");
+        //Context.setApplicationClassLoader(bluej.runtime.ExecServer.getCurrentClassLoader());
+        engine.put("game", GameScriptFacade.getInstance()); //you can call this façade on script side.
+        /*
+        try {
+            //engine.eval("importPackage(Packages);importPackage(Packages.greenfoot);");
+            //bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        }
+        
+        catch(ScriptException scrEx)
+        {
+            scrEx.printStackTrace();
+        } 
+        */
     }
+    
+    private ScriptManager(){}
 
-    public static void evalFile(String scriptFile) {
+    /**
+     * Evaluates an entire javascript file. Script files must be of type .js and must be located in "scripts" folder. 
+     *
+     * @param script the name of .js file without extension.
+     */
+    public static void evalFile(String script) {
         try{
-            FileReader fr = new FileReader("./scripts/" + scriptFile);
-            engine.eval(fr, bindings);
+            String file = "./scripts/" + script + ".js";
+            if (Files.notExists(Paths.get(file))) return;
+            FileReader fr = new FileReader(file);
+            //engine.eval(fr, bindings);
+            engine.eval(fr);
             fr.close();
         }
         catch(IOException ioEx)
@@ -40,9 +74,15 @@ public final class ScriptManager
         }        
     }
     
+    /**
+     * Evaluates a literal script.
+     *
+     * @param script the script to be evaluated.
+     */
     public static void eval(String script) {
         try{
-            engine.eval(script, bindings);
+            //engine.eval(script, bindings);
+            engine.eval(script);
         }
         catch(ScriptException scrEx)
         {
@@ -51,10 +91,27 @@ public final class ScriptManager
     }    
     
 
-    public static void invokeFunction(String scriptFile, String function,  Object... args) {
+    /**
+     * Invokes a function from a javascript file. Script files must be of type .js and must be located in "scripts" folder. 
+     *
+     * @param script the name of .js file without extension.
+     * @param function the function to be called.
+     * @param args the function arguments.
+     */
+    public static void invokeFunction(String script, String function,  Object... args) {
         try{
-            FileReader fr = new FileReader("./scripts/" + scriptFile);
-            engine.eval(fr, bindings);
+            String file = "./scripts/" + script + ".js";
+            Path filePath = Paths.get(file);
+            if (Files.notExists(filePath)) return;
+            long lastModifiedTime = Files.getLastModifiedTime(filePath).toMillis();
+            if(scriptModifiedStatus.get(script) == null) {
+                scriptModifiedStatus.put(script, lastModifiedTime);
+            }
+            if(lastModifiedTime != scriptModifiedStatus.get(script)) {
+                FileReader fr = new FileReader(file);
+                //engine.eval(fr, bindings);
+                engine.eval(fr);
+            }
             
             // javax.script.Invocable is an optional interface.  
             // Check whether your script engine implements or not!  
@@ -78,20 +135,37 @@ public final class ScriptManager
             nsmEx.printStackTrace();
         }
     }
-    /*
-    public static void invokeFunction(String scriptFile, String function, String name, Object... args) {
+    
+    /**
+     * Invokes a function from a javascript file. Script files must be of type .js and must be located in "scripts" folder. 
+     *
+     * @param script the name of .js file without extension.
+     * @param function the function to be called.
+     * @param args the function arguments.
+     */
+    public static Object invokeMethod(String script, String object, String method,  Object... args) {
         try{
-            FileReader fr = new FileReader("./scripts/" + scriptFile);
-            engine.put("name", name);
-            engine.eval(fr, bindings);
+            String file = "./scripts/" + script + ".js";
+            Path filePath = Paths.get(file);
+            if (Files.notExists(filePath)) return null;
+            long lastModifiedTime = Files.getLastModifiedTime(filePath).toMillis();
+            if(scriptModifiedStatus.get(script) == null || lastModifiedTime != scriptModifiedStatus.get(script)) {
+                scriptModifiedStatus.put(script, lastModifiedTime);
+                FileReader fr = new FileReader(file);
+                engine.eval(fr);
+            }
             
+            // get script object on which we want to implement the interface with
+            Object obj = engine.get(object);
+            if(obj == null) return null;
+        
             // javax.script.Invocable is an optional interface.  
             // Check whether your script engine implements or not!  
             // Note that the JavaScript engine implements Invocable interface.  
             Invocable inv = (Invocable) engine;  
       
             // invoke the global function named "hello"  
-            inv.invokeFunction(function, args);  
+            return inv.invokeMethod(obj, method, args);  
             
         }
         catch(IOException ioEx)
@@ -106,7 +180,7 @@ public final class ScriptManager
         {
             nsmEx.printStackTrace();
         }
+        return null;
     }
-    */
     
 }

@@ -1,7 +1,5 @@
 #BlueJ class context
-comment0.params=world
-comment0.target=FightWorld(WizardWorld)
+comment0.params=
+comment0.target=FightWorld()
 comment0.text=\n\ Constructor\ for\ objects\ of\ class\ FightWorld.\n\ \n
-comment1.params=
-comment1.target=void\ act()
-numComments=2
+numComments=1

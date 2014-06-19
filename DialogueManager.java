@@ -10,63 +10,130 @@ import java.util.Map;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class DialogueManager  
+public final class DialogueManager  
 {
   
-    private static DialogueManager instance = new DialogueManager();
-    private static Map<String, DialogueStatus> dialogues = new HashMap<String, DialogueStatus>();    
+    /**
+     * All dialogs have an id
+     */
+    private static Map<String, Dialogue> dialogues = new HashMap<String, Dialogue>();    
+    
     
     /**
-     * Constructor for objects of class DialogueManager
+     * Returns a dialogue based on id
+     *
+     * @param id of dialogue
+     * @return return a dialogue
      */
-    public DialogueManager()
-    {
+    public static Dialogue getDialogue(String id) {
+        return dialogues.get(id);
     }
     
-    public static DialogueManager getInstance() {
-        return instance;
+    /**
+     * Gets a value indicating if dialogue is closed.
+     *
+     * @param id A parameter
+     * @return The return value
+     */
+    public static boolean isDialogueClosed(String id) {
+        return dialogues.get(id).isClosed();
     }
-    
-    public Dialogue getDialogue(String id) {
-        return dialogues.get(id).dialogue;
-    }
-    
-    public boolean isDialogueClosed(String id) {
-        return dialogues.get(id).closed;
-    }
-    
-    public boolean openDialogue(String id) {
-        DialogueStatus ds = dialogues.get(id);
-        if (ds != null || ds.closed == true) {
-            return false;
-        }
-        else if (ds == null) {
-            ds = new DialogueStatus();
-            Dialogue d = readDialogue(id);
-            if (d == null) {return false;}
-            
-        }
-        return true;
-    }
-    /*
-    public DialogueWorld(WizardWorld world, Dialogue dialogue)
-    {    
-        super(672, 525, 1); 
-        DialoguePanel dialoguePanel = new DialoguePanel(world, dialogue);
-        SoundManager.stopSound("outside.mp3");
-        SoundManager.playSound("dialogue.mp3", true);
 
+    public static Dialogue getDialogue(String id, PlayerCharacter player, 
+                                          Character interlocutor) {
+        Dialogue d = dialogues.get(id);
+        if (d == null) {
+            d = (Dialogue)ScriptManager.invokeMethod("scripts", 
+                                                     interlocutor.getName(), 
+                                                     "getDialogue",
+                                                     id, player,
+                                                     interlocutor);
+                                                     
+            if (d == null) {return null;}
+            dialogues.put(id, d);
+        }
+        return d;
+    }
+    
+    /**
+     * Open a dialogue based on id
+     *
+     * @param id A parameter
+     * @return The return value
+     */
+    public static Dialogue openDialogue(String id, PlayerCharacter player, Character interlocutor) {
+        Dialogue d = getDialogue(id, player, interlocutor);
+        if (d == null || d.isClosed()) {return d;}
+        d.setFeedbackMessage("");
+        if(Game.getCurrentWorld() instanceof DialogueWorld) {
+           DialogueWorld dw =  (DialogueWorld)Game.getCurrentWorld();
+           dw.getDialoguePanel().updateDialogue(d);
+        }
+        else {
+            Game.setCurrentWorld(new DialogueWorld(d));
+        }
+        Game.stopSound(Game.getScene().getSoundToPlay());
+        Game.playLoopSound(d.getSoundToPlay());
+        return d;
+    }
+   
+    
+    /**
+     * Open a dialogue based on id
+     *
+     * @param id A parameter
+     * @return The return value
+     */
+    public static Dialogue redirectToDialogue(String id, PlayerCharacter player, Character interlocutor) {
+        return openDialogue(id, player, interlocutor);
     }    
-    */
-    public boolean closeDialogue(String id) {
+    
+    public static void updateDialogueMessages() {
+        if(Game.getCurrentWorld() instanceof DialogueWorld) {
+           DialogueWorld dw =  (DialogueWorld)Game.getCurrentWorld();
+           dw.getDialoguePanel().updateDialogueMessages();
+        }
+    }
+    
+    /**
+     * Close the dialogue.
+     * When a dialogue is closed it cannot be reopened.
+     *
+     * @param id The dialogue id
+     * @return true if dialogue could be closed or false if dialogue does not exists. 
+     */
+    public static boolean closeDialogue(String id) {
         if (dialogues.get(id) != null) {
-            dialogues.get(id).closed = true;
+            dialogues.get(id).close();
             return true;
         }
         return false;
     }
     
-   public Dialogue readDialogue(String id) {
+    public static boolean exitDialogue() {
+        if(Game.getCurrentWorld() instanceof DialogueWorld) {
+           DialogueWorld dw =  (DialogueWorld)Game.getCurrentWorld();
+           dw.getDialoguePanel().dispose();
+           return true;
+        }
+        return false;
+    }
+    
+    
+    public static void enableDialogueChoices(boolean enabled) {
+        if(Game.getCurrentWorld() instanceof DialogueWorld) {
+           DialogueWorld dw =  (DialogueWorld)Game.getCurrentWorld();
+           dw.getDialoguePanel().enableDialogueChoices(enabled);
+        }
+    }
+    
+   /**
+    * Read a dialogue serialized in a xml file.
+    *
+    * @param id The id of the dialogue. The dialogue file must be placed in ./dialogues/"id".xml.
+    * @return The dialogue deserialized.
+    */
+   public static Dialogue readDialogue(String id) {
        try{
            XMLDecoder d = new XMLDecoder(
                               new BufferedInputStream(
@@ -74,10 +141,7 @@ public class DialogueManager
                                   bluej.runtime.ExecServer.getCurrentClassLoader());
            Object result = d.readObject();
            d.close();
-           System.out.println(result.getClass());
-           if (result instanceof Dialogue){
-               return (Dialogue)result;
-           }
+           return (Dialogue)result;
        }
        catch(IOException ioEx)
        {
@@ -86,7 +150,13 @@ public class DialogueManager
        return null;
    }
    
-   public void writeDialogue(Dialogue dialogue) {
+   /**
+    * Serialize a dialogue to a xml file.
+    * The dialogue will be serialized in ./dialogues/"id".xml.
+    *
+    * @param dialogue The dialogue to be serialized.
+    */
+   public static void writeDialogue(Dialogue dialogue) {
         try{
             XMLEncoder e = new XMLEncoder(
                 new BufferedOutputStream(

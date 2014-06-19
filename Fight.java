@@ -15,14 +15,12 @@ import greenfoot.*;
 public class Fight
 {
     private java.util.List<JComponent> components = new ArrayList<JComponent>();
-    private WizardWorld world;
 
     /**
      * Constructor for objects of class Dialog
      */
-    public Fight(WizardWorld world)
+    public Fight()
     {
-        this.world = world;
         initComponents();
         
         npc.setImage("./images/wizard.jpg");

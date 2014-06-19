@@ -9,22 +9,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class DialogueWorld extends World
 {
 
+    private DialoguePanel dialoguePanel;
     
     /**
      * Constructor for objects of class DialogueWorld.
      * 
      */
-    public DialogueWorld(WizardWorld world, Dialogue dialogue)
+    public DialogueWorld(Dialogue dialogue)
     {    
         super(672, 525, 1); 
-        DialoguePanel dialoguePanel = new DialoguePanel(world, dialogue);
-        SoundManager.stopSound("outside.mp3");
-        SoundManager.playSound("dialogue.mp3", true);
+        dialoguePanel = new DialoguePanel(dialogue);
+        //SoundManager.stopSound("outside");
+        //SoundManager.playSound("dialogue", true);
 
     }
     
-    public void act() {
+    public DialoguePanel getDialoguePanel() {
+        return dialoguePanel;
     }
-  
-        
+    
 }

@@ -1,11 +1,4 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Knight()
-comment1.params=
-comment1.target=void\ act()
-comment1.text=\n\ Act\ -\ do\ whatever\ the\ Wizard\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environ4ment.\n
-comment2.params=
-comment2.target=void\ interact()
-comment3.params=npc
-comment3.target=void\ interact(Character)
-numComments=4
+comment0.params=name
+comment0.target=Knight(java.lang.String)
+numComments=1

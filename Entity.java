@@ -26,8 +26,18 @@ public abstract class Entity extends Actor
     private int blockSize = 32;
     
     private String name;
+    private String scriptObject;
     
-    private static int count = 0;
+    /**
+     * Set if this entity is visible on the current world.
+     */
+    private boolean visible;
+    
+    private int x;
+    
+    private int y;
+    
+    public abstract void reset();
     
     public void act() {
         if(getInitialLocation() == null) {
@@ -36,11 +46,36 @@ public abstract class Entity extends Actor
     }
 
     public void setName(String name) {
-        this.name = name + ++count;
+        this.name = name;
     }
     
     public String getName() {
         return this.name;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    
+    public boolean isVisible() {
+        return this.visible;
+    }
+
+    public void show() {
+        this.visible = true;
+    }
+    
+    public void hide() {
+        this.visible = false;
+    }
+    
+    public void setScriptObject(String scriptObject) {
+        this.scriptObject = scriptObject;
+    }
+    
+    public String getScriptObject() {
+        if (scriptObject == null) return name;
+        return scriptObject;
     }
 
     public void setSpriteSheet(String spriteSheet) {
@@ -67,6 +102,36 @@ public abstract class Entity extends Actor
         setImage(SpriteSheetManager.getSprite(spriteSheet, id, blockSize));
     }
     
+    public int getX() {
+        if(getWorld() == null) {
+            return x;
+        }
+        return super.getX();
+    }
+    
+    public int getY() {
+        if(getWorld() == null) {
+            return y;
+        }
+        return super.getY();
+    }
+    
+    public void setX(int x) {
+        super.setLocation(x, getY());
+        this.x = x;
+    }
+    
+    public void setY(int y) {
+        super.setLocation(getX(), y);
+        this.y = y;
+    }
+    
+    public void setLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
+        super.setLocation(x, y);
+    }
+    
     public Location getLocation() {
         return new Location(getX(), getY());
     }
@@ -77,6 +142,7 @@ public abstract class Entity extends Actor
     
     public void setInitialLocation(Location initialLocation) {
         this.initialLocation = initialLocation;
+        setX(initialLocation.getX());
+        setY(initialLocation.getY());
     }
-    
 }

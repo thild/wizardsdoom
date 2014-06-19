@@ -9,28 +9,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class FightWorld extends World
 {
 
-    private WizardWorld world;
     private Fight fight;
     
     /**
      * Constructor for objects of class FightWorld.
      * 
      */
-    public FightWorld(WizardWorld world)
+    private FightWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 600, 1); 
-        this.world = world;
-        this.fight = new Fight(world);
+        this.fight = new Fight();
     }
-
-    
-    public void act() {
-    
-        if(Greenfoot.isKeyDown("escape")) {
-            Greenfoot.setWorld(world);
-            fight.dispose();
-        }
-    }
-    
 }

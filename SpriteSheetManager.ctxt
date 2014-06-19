@@ -1,5 +1,7 @@
 #BlueJ class context
-comment0.params=spriteSheetFile\ id\ blockWidth
-comment0.target=greenfoot.GreenfootImage\ getSprite(java.lang.String,\ int,\ int)
-comment0.text=\n\ This\ uses\ an\ ID\ where\ 0\ will\ be\ the\ first\ image\ on\ the\ sheet.\n\ The\ block\ width\ is\ the\ width\ of\ a\ SQUARE\ block\ on\ the\ sheet,\n\ the\ returned\ image\ will\ also\ be\ a\ SQUARE\ block.\n
-numComments=1
+comment0.params=
+comment0.target=SpriteSheetManager()
+comment1.params=spriteSheetFile\ id\ blockWidth
+comment1.target=greenfoot.GreenfootImage\ getSprite(java.lang.String,\ int,\ int)
+comment1.text=\n\ This\ uses\ an\ ID\ where\ 0\ will\ be\ the\ first\ image\ on\ the\ sheet.\n\ The\ block\ width\ is\ the\ width\ of\ a\ SQUARE\ block\ on\ the\ sheet,\n\ the\ returned\ image\ will\ also\ be\ a\ SQUARE\ block.\n\ @param\ spriteSheetFile\ The\ sprite\ sheet\ image\ file.\n\ @param\ id\ The\ sprite\ id\n\ <p>\n\ The\ sprite\ is\ returned\ by\ the\ following\ algorithm.\ <br\ />\n\ int\ cols\ \=\ spriteSheet.getWidth()\ /\ blockWidth;\ <br\ />\n\ int\ x\ \=\ (id\ %\ cols)\ *\ blockWidth;\ \ <br\ />\n\ int\ y\ \=\ (id\ /\ cols)\ *\ blockWidth;\n\ </p>\n\ @param\ blockWidth\ The\ sprite\ block\ width.\ Ex.\:\ if\ the\ block\ width\ was\ 32\ the\ sprite\ size\ is\ 32x32\ pixels.\n\ @return\ A\ GreenfootImage\ base\ on\ the\ sprite.\n
+numComments=2

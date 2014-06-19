@@ -5,47 +5,22 @@
  * @version (a version number or a date)
  */
 
-public class Choice {
+public interface Choice {
    
-   private String message;
-   private String conditionFunction;
-   private String acceptFunction;
-   private String id;
+    public int getId();
    
-    public Choice() {
+    public void setId(int id);
     
-    }
+    public String getMessage();
+    
+    public void setMessage(String message);
+    
+    public boolean wasChosen();
+    
+    public void markAsChosen();
+  
+    public void setDialogue(Dialogue dialogue);
    
-    public String getId() {
-        return id;
-    }
-   
-    public void setId(String id) {
-        this.id = id;
-    }
+    public Dialogue getDialogue();
     
-    public String getMessage() {
-        return message;
-    }
-    
-    public void setMessage(String message) {
-        this.message = message;
-    }    
-    
-    public String getConditionFunction() {
-        return conditionFunction;
-    }
-    
-    public void setConditionFunction(String conditionFunction) {
-        this.conditionFunction = conditionFunction;
-    }    
-    
-    public String getAcceptFunction() {
-        return acceptFunction;
-    }
-    
-    public void setAcceptFunction(String acceptFunction) {
-        this.acceptFunction = acceptFunction;
-    }    
-
 }

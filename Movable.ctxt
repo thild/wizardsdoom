@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=boolean\ isMovable()
+comment1.params=isMovable
+comment1.target=void\ setMovable(boolean)
+comment2.params=
+comment2.target=void\ move()
+numComments=3

@@ -15,22 +15,17 @@ import greenfoot.*;
 public class DialoguePanel
 {
     private java.util.List<JComponent> components = new ArrayList<JComponent>();
-    private WizardWorld world;
     private Dialogue dialogue;
-    private Choice chosen;
-
+    private Choice choice;
+    private boolean closing = false;
     /**
      * Constructor for objects of class Dialog
      */
-    public DialoguePanel(WizardWorld world, Dialogue dialogue)
+    public DialoguePanel(Dialogue dialogue)
     {
-        this.world = world;
         this.dialogue = dialogue;
         initComponents();
-        
-        npc.setImage("./images/wizard.jpg");
-        pc.setImage("./images/knight.jpg");
-        
+
         /*
             final JPanel panel = WorldHandler.getInstance().getWorldCanvas();  
             //panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -68,27 +63,41 @@ public class DialoguePanel
     private javax.swing.JPanel controls;
     private javax.swing.JButton ok;
     private javax.swing.JPanel images;
-    private ImagePanel npc;
+    private ImagePanel interlocutor;
     private javax.swing.JPanel panel;
     private ImagePanel pc;
     private javax.swing.JPanel question;
     private javax.swing.JLabel questionLabel;
+    private javax.swing.JLabel feedbackLabel;
     // End of variables declaration      
     private LayoutManager layoutManager;
     
     private void initComponents() {
         final JPanel canvas = WorldHandler.getInstance().getWorldCanvas();
+        if(panel != null) {
+            panel.removeAll();
+            canvas.remove(panel);
+        }
         layoutManager = canvas.getLayout();
         canvas.setLayout(new javax.swing.BoxLayout(canvas, javax.swing.BoxLayout.LINE_AXIS));
         
         answerGroup = new javax.swing.ButtonGroup();
         panel = new javax.swing.JPanel();
         images = new javax.swing.JPanel();
-        npc = new ImagePanel();
+        interlocutor = new ImagePanel();
         pc = new ImagePanel();
         question = new javax.swing.JPanel();
         questionLabel = new javax.swing.JLabel();
-        answers = new javax.swing.JPanel();
+        feedbackLabel = new javax.swing.JLabel();
+        answers = new javax.swing.JPanel() {
+            @Override
+            public void setEnabled(boolean enabled) {
+                super.setEnabled(enabled);
+                for (Component component : getComponents()) {
+                    component.setEnabled(enabled);
+                }
+            }
+        };
         controls = new javax.swing.JPanel();
         ok = new javax.swing.JButton();
 
@@ -96,18 +105,18 @@ public class DialoguePanel
 
         images.setLayout(new java.awt.GridLayout(1, 2));
 
-        javax.swing.GroupLayout npcLayout = new javax.swing.GroupLayout(npc);
-        npc.setLayout(npcLayout);
-        npcLayout.setHorizontalGroup(
-            npcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout interlocutorLayout = new javax.swing.GroupLayout(interlocutor);
+        interlocutor.setLayout(interlocutorLayout);
+        interlocutorLayout.setHorizontalGroup(
+            interlocutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
         );
-        npcLayout.setVerticalGroup(
-            npcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        interlocutorLayout.setVerticalGroup(
+            interlocutorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 91, Short.MAX_VALUE)
         );
 
-        images.add(npc);
+        images.add(interlocutor);
 
         javax.swing.GroupLayout pcLayout = new javax.swing.GroupLayout(pc);
         pc.setLayout(pcLayout);
@@ -120,15 +129,21 @@ public class DialoguePanel
             .addGap(0, 91, Short.MAX_VALUE)
         );
 
+        interlocutor.setImage("./images/" + dialogue.getInterlocutor().getCharacterImage());
+        pc.setImage("./images/" + dialogue.getPlayer().getCharacterImage());
+        
         images.add(pc);
 
         panel.add(images);
 
         question.setAutoscrolls(true);
-        question.setLayout(new javax.swing.BoxLayout(question, javax.swing.BoxLayout.LINE_AXIS));
+        question.setLayout(new javax.swing.BoxLayout(question, javax.swing.BoxLayout.PAGE_AXIS));
 
-        questionLabel.setText("What's the capital of Turkey?");
+        questionLabel.setText(dialogue.getMessage());
         question.add(questionLabel);
+
+        feedbackLabel.setText(dialogue.getFeedbackMessage());
+        question.add(feedbackLabel);
 
         panel.add(question);
 
@@ -140,12 +155,9 @@ public class DialoguePanel
             answerGroup.add(answer);
             answer.setText(c.getMessage());
             answer.addActionListener(new java.awt.event.ActionListener() {
+                int i = 0;
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    chosen = c;
-                    //answerActionPerformed(evt);
-                    System.out.println(dialogue.getPc().getSpeed());
-                    System.out.println(dialogue.getPc().getPower());
-                    System.out.println(dialogue.getPc().getHealth());
+                    choice = c;
                 }
             });
             answers.add(answer);
@@ -184,32 +196,54 @@ public class DialoguePanel
     }
    
     private void okActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        //if (closing) {
+        //    dispose();
+        //    return;
+        //}
         // TODO add your handling code here:
-        System.out.println("Oking dialogue!"); 
-        ScriptManager.invokeFunction(dialogue.getScriptFile(), 
-                                     chosen.getAcceptFunction(), 
-                                     dialogue.getPc().getName(), 
-                                     dialogue.getNpc().getName());
-        
-        dispose();
+        ScriptManager.invokeMethod("scripts", 
+                                       dialogue.getInterlocutor().getName(), 
+                                       "evaluateDialogue",
+                                       dialogue, choice);
 
+        //if(dialogue.isClosed() || choice instanceof ExitChoice) {
+        //    closing = true;
+        //    answers.setEnabled(false);
+        //}
     }                                    
    
     private void answerActionPerformed(java.awt.event.ActionEvent evt) {                                        
           // TODO add your handling code here:
-        SoundManager.playSound("donkey.mp3");
+        //SoundManager.playSound("donkey");
     }                                       
 
+    public void updateDialogue(Dialogue dialogue) {
+        this.dialogue = dialogue;
+        initComponents();
+    }
+    
+
+    public void updateDialogueMessages() {    
+        questionLabel.setText(dialogue.getMessage());
+        feedbackLabel.setText(dialogue.getFeedbackMessage());
+        //if(disableChoices) {
+        //    answers.setEnabled(false);
+        //}
+    }
    
+
+    public void enableDialogueChoices(boolean enabled) {
+       answers.setEnabled(enabled);
+    }
+    
+    
     public void dispose() {
         final JPanel canvas = WorldHandler.getInstance().getWorldCanvas();
         canvas.remove(panel);
         canvas.setLayout(layoutManager);
         canvas.updateUI();
         canvas.requestFocus();
-        SoundManager.stopSound("dialogue.mp3");
-        Greenfoot.setWorld(world);
-        SoundManager.playSound("outside.mp3", true);        
+        Game.resumeToActionWorld();
     }
 
 }
