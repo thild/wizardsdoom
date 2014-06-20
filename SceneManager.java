@@ -121,6 +121,9 @@ public final class SceneManager
     
     public void resumeToActionWorld() {
         currentWorld = actionWorld;
+        if(Game.isRunning()) {
+            SoundManager.getInstance().playSound(getScene().getSoundToPlay(), true);
+        }
         Greenfoot.setWorld(actionWorld);
     }
     
@@ -196,6 +199,14 @@ public final class SceneManager
     
     public Scene getScene() {
         return currentScene;
+    }
+    
+    public void playMusic() {
+        SoundManager.getInstance().playSound(getScene().getSoundToPlay(), true);
+    }
+    
+    public void pauseMusic() {
+        SoundManager.getInstance().pauseSound(getScene().getSoundToPlay());
     }
     
     private void clearWorld() {

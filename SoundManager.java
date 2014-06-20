@@ -73,4 +73,16 @@ public final class SoundManager
             gfsound.stop();
         }
     }
+    
+    /**
+     * Pause playing a sound.
+     * @param sound is the name of mp3 file without extension.
+     */
+    public void pauseSound(String sound) {
+        GreenfootSound gfsound = sounds.get(sound); // try get sound from buffer
+        if(gfsound != null) { //if sound is not null stop the sound
+            gfsound.pause();
+        }
+    }
+    
 }

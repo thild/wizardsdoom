@@ -42,8 +42,8 @@ public class Inventory
     }
     
     public void openInventory() {
-        if(!(Game.getCurrentWorld() instanceof InventoryWorld)) {
-            Game.setCurrentWorld(new InventoryWorld());
+        if(!(SceneManager.getInstance().getCurrentWorld() instanceof InventoryWorld)) {
+            SceneManager.getInstance().setCurrentWorld(new InventoryWorld());
         }
     }
 }

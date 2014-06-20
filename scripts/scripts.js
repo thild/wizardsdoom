@@ -2,13 +2,15 @@
 //http://dmitrysoshnikov.com/ecmascript/chapter-7-2-oop-ecmascript-implementation/#prototype
 //http://blogger.ziesemer.com/2007/10/respecting-javascript-global-namespace.html
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
+var game = Packages.Game;
 
-var bootstrap = new function() {
-  this.createGame = function() {
+var gameConfig = new function() {
+  this.setup = function() {
     importClass(Packages.Scene);
     importClass(Packages.NonPlayerCharacter);
     importClass(Packages.Wizard);
     importClass(Packages.Knight);
+    importClass(Packages.Direction);
     
     var scene = new Scene("village");
     scene.setSoundToPlay("outside");
@@ -18,12 +20,11 @@ var bootstrap = new function() {
     w1.setLocation(300, 150);
     scene.addEntity(w1);
     
-    var l1 = new Knight("knight");
-    l1.setLocation(420, 300);
-    scene.addEntity(l1);
+    var knight = new Knight("knight");
+    knight.setLocation(420, 300);
+    scene.addEntity(knight);
 
-    game.setScene(scene);
-    game.setPc(l1);
+    game.setPc(knight);
     
     var thief = new NonPlayerCharacter("thief");
     thief.setSprite(3); //initialSprite
@@ -40,21 +41,32 @@ var bootstrap = new function() {
     
     var north = new Scene("north village");
     north.setBackground("north.png");
-    scene.setNeighbourScene(Direction.NORTH, north);    
-    north.addEntity(l1);
+    scene.setNeighbourScene(Packages.Direction.NORTH, north);    
+    north.addEntity(knight);
     game.addScene(north);
     
-    thief = new NonPlayerCharacter("thief2");
-    thief.setSprite(3); //initialSprite
-    thief.setMoveRadius(0); //radius of movement
-    thief.setSouthSprites(3, 5);
-    thief.setWestSprites(15, 17);
-    thief.setEastSprites(27, 29);
-    thief.setNorthSprites(39, 41);
-    thief.setLocation(100, 400);
-    thief.setCharacterImage("thief.jpg");
+    var thief2 = new NonPlayerCharacter("thief2");
+    thief2.setSprite(3); //initialSprite
+    thief2.setMoveRadius(0); //radius of movement
+    thief2.setSouthSprites(3, 5);
+    thief2.setWestSprites(15, 17);
+    thief2.setEastSprites(27, 29);
+    thief2.setNorthSprites(39, 41);
+    thief2.setLocation(100, 400);
+    thief2.setCharacterImage("thief.jpg");
 
-    north.addEntity(thief);
+    north.addEntity(thief2);
+    
+    game.setScene(scene);
+    
+  }
+  
+  this.start = function() {
+    game.playMusic();
+  }
+  
+  this.pause = function() {
+    game.pauseMusic();
   }
   
 }();
@@ -131,7 +143,7 @@ var wizard = new function(){
   
   this.interact = function(player, me) {
     if(player.hasQueuedDialogue(me)) {
-      
+      player.getCurrentDialogue(me).open();
     }
     else {
       player.queueDialogue('0001', me);

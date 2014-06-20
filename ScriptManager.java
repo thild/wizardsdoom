@@ -34,7 +34,10 @@ public final class ScriptManager
         Thread.currentThread().setContextClassLoader(bluej.runtime.ExecServer.getCurrentClassLoader());
         engine = new ScriptEngineManager().getEngineByName("javascript");
         //Context.setApplicationClassLoader(bluej.runtime.ExecServer.getCurrentClassLoader());
-        engine.put("game", GameScriptFacade.getInstance()); //you can call this façade on script side.
+        //int flags = DONTENUM | READONLY | PERMANENT;
+        //ScriptableObject.defineProperty(prc, "Result", new NativeJavaClass(prc, Direction.class), flags);
+        //engine.put("game", Game.getInstance()); //you can call this façade on script side.
+        
         /*
         try {
             //engine.eval("importPackage(Packages);importPackage(Packages.greenfoot);");

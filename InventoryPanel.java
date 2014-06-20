@@ -163,7 +163,7 @@ public class InventoryPanel
         canvas.setLayout(layoutManager);
         canvas.updateUI();
         canvas.requestFocus();
-        Game.resumeToActionWorld();
+        SceneManager.getInstance().resumeToActionWorld();
     }
     
 }

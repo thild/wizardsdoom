@@ -97,7 +97,11 @@ public class Dialogue
     public void setSoundToPlay(String soundToPlay) {
         this.soundToPlay = soundToPlay;
     }   
-  
+
+   public void open() {
+       DialogueManager.getInstance().openDialogue(id, player, interlocutor);
+   }
+    
    public void close() {
        closed = true;
    }

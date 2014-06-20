@@ -243,7 +243,7 @@ public class DialoguePanel
         canvas.setLayout(layoutManager);
         canvas.updateUI();
         canvas.requestFocus();
-        Game.resumeToActionWorld();
+        SceneManager.getInstance().resumeToActionWorld();
     }
 
 }

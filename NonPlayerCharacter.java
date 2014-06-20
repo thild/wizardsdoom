@@ -37,8 +37,8 @@ public class NonPlayerCharacter extends Character
     public boolean canMove(Direction direction)
     {
         Location iLocation = getInitialLocation();
-        int width = Game.getScene().getWidth();
-        int height = Game.getScene().getHeight();
+        int width = SceneManager.getInstance().getScene().getWidth();
+        int height = SceneManager.getInstance().getScene().getHeight();
         int x = getX();
         int y = getY();
         switch(direction) {

@@ -18,14 +18,29 @@ public final class DialogueManager
      */
     private static Map<String, Dialogue> dialogues = new HashMap<String, Dialogue>();    
     
+    /**
+     * Singleton object
+     */
+    private final static DialogueManager instance = new DialogueManager();
+
     
+    /**
+     * Constructor for objects of class DialogueManager
+     */
+    private DialogueManager() {
+    }
+    
+    public static DialogueManager getInstance() {
+        return instance;
+    }    
+
     /**
      * Returns a dialogue based on id
      *
      * @param id of dialogue
      * @return return a dialogue
      */
-    public static Dialogue getDialogue(String id) {
+    public Dialogue getDialogue(String id) {
         return dialogues.get(id);
     }
     
@@ -35,11 +50,11 @@ public final class DialogueManager
      * @param id A parameter
      * @return The return value
      */
-    public static boolean isDialogueClosed(String id) {
+    public boolean isDialogueClosed(String id) {
         return dialogues.get(id).isClosed();
     }
 
-    public static Dialogue getDialogue(String id, PlayerCharacter player, 
+    public Dialogue getDialogue(String id, PlayerCharacter player, 
                                           Character interlocutor) {
         Dialogue d = dialogues.get(id);
         if (d == null) {
@@ -61,19 +76,19 @@ public final class DialogueManager
      * @param id A parameter
      * @return The return value
      */
-    public static Dialogue openDialogue(String id, PlayerCharacter player, Character interlocutor) {
+    public Dialogue openDialogue(String id, PlayerCharacter player, Character interlocutor) {
         Dialogue d = getDialogue(id, player, interlocutor);
         if (d == null || d.isClosed()) {return d;}
         d.setFeedbackMessage("");
-        if(Game.getCurrentWorld() instanceof DialogueWorld) {
-           DialogueWorld dw =  (DialogueWorld)Game.getCurrentWorld();
+        if(SceneManager.getInstance().getCurrentWorld() instanceof DialogueWorld) {
+           DialogueWorld dw =  (DialogueWorld)SceneManager.getInstance().getCurrentWorld();
            dw.getDialoguePanel().updateDialogue(d);
         }
         else {
-            Game.setCurrentWorld(new DialogueWorld(d));
+            SceneManager.getInstance().setCurrentWorld(new DialogueWorld(d));
         }
-        Game.stopSound(Game.getScene().getSoundToPlay());
-        Game.playLoopSound(d.getSoundToPlay());
+        SoundManager.getInstance().stopSound(SceneManager.getInstance().getScene().getSoundToPlay());
+        SoundManager.getInstance().playSound(d.getSoundToPlay(), true);
         return d;
     }
    
@@ -84,13 +99,13 @@ public final class DialogueManager
      * @param id A parameter
      * @return The return value
      */
-    public static Dialogue redirectToDialogue(String id, PlayerCharacter player, Character interlocutor) {
+    public Dialogue redirectToDialogue(String id, PlayerCharacter player, Character interlocutor) {
         return openDialogue(id, player, interlocutor);
     }    
     
-    public static void updateDialogueMessages() {
-        if(Game.getCurrentWorld() instanceof DialogueWorld) {
-           DialogueWorld dw =  (DialogueWorld)Game.getCurrentWorld();
+    public void updateDialogueMessages() {
+        if(SceneManager.getInstance().getCurrentWorld() instanceof DialogueWorld) {
+           DialogueWorld dw =  (DialogueWorld)SceneManager.getInstance().getCurrentWorld();
            dw.getDialoguePanel().updateDialogueMessages();
         }
     }
@@ -102,7 +117,7 @@ public final class DialogueManager
      * @param id The dialogue id
      * @return true if dialogue could be closed or false if dialogue does not exists. 
      */
-    public static boolean closeDialogue(String id) {
+    public boolean closeDialogue(String id) {
         if (dialogues.get(id) != null) {
             dialogues.get(id).close();
             return true;
@@ -110,9 +125,9 @@ public final class DialogueManager
         return false;
     }
     
-    public static boolean exitDialogue() {
-        if(Game.getCurrentWorld() instanceof DialogueWorld) {
-           DialogueWorld dw =  (DialogueWorld)Game.getCurrentWorld();
+    public boolean exitDialogue() {
+        if(SceneManager.getInstance().getCurrentWorld() instanceof DialogueWorld) {
+           DialogueWorld dw =  (DialogueWorld)SceneManager.getInstance().getCurrentWorld();
            dw.getDialoguePanel().dispose();
            return true;
         }
@@ -120,9 +135,9 @@ public final class DialogueManager
     }
     
     
-    public static void enableDialogueChoices(boolean enabled) {
-        if(Game.getCurrentWorld() instanceof DialogueWorld) {
-           DialogueWorld dw =  (DialogueWorld)Game.getCurrentWorld();
+    public void enableDialogueChoices(boolean enabled) {
+        if(SceneManager.getInstance().getCurrentWorld() instanceof DialogueWorld) {
+           DialogueWorld dw =  (DialogueWorld)SceneManager.getInstance().getCurrentWorld();
            dw.getDialoguePanel().enableDialogueChoices(enabled);
         }
     }
@@ -133,7 +148,7 @@ public final class DialogueManager
     * @param id The id of the dialogue. The dialogue file must be placed in ./dialogues/"id".xml.
     * @return The dialogue deserialized.
     */
-   public static Dialogue readDialogue(String id) {
+   public Dialogue readDialogue(String id) {
        try{
            XMLDecoder d = new XMLDecoder(
                               new BufferedInputStream(
@@ -156,7 +171,7 @@ public final class DialogueManager
     *
     * @param dialogue The dialogue to be serialized.
     */
-   public static void writeDialogue(Dialogue dialogue) {
+   public void writeDialogue(Dialogue dialogue) {
         try{
             XMLEncoder e = new XMLEncoder(
                 new BufferedOutputStream(

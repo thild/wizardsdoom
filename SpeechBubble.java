@@ -278,6 +278,7 @@ public class SpeechBubble extends Actor
         if(getWorld() == null) return;
         if (Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("escape")) {    
             character.stopSpeak();  
+            return;
         }  
         
         int sbHeight = this.getImage().getHeight();
@@ -292,8 +293,8 @@ public class SpeechBubble extends Actor
         int sbHalfWidth = sbWidth / 2;
         int charHalfWidth = charWidth / 2;
         
-        int sceneWidth = Game.getScene().getWidth();
-        int sceneHeight = Game.getScene().getWidth();
+        int sceneWidth = SceneManager.getInstance().getScene().getWidth();
+        int sceneHeight = SceneManager.getInstance().getScene().getWidth();
 
         int xOffset = sbHalfWidth - charHalfWidth;
         int yOffset = sbHalfHeight + charHalfHeight;

@@ -19,8 +19,39 @@ public final class Game
 
     private static SecureRandom random = new SecureRandom();
     private static Inventory inventory = new Inventory();
+    private static boolean isRunning;
+    private static boolean isSet;
 
-    private Game() {}
+    /**
+     * Singleton object
+     */
+    /*
+    private final static Game instance = new Game();
+    */
+    
+    /**
+     * Constructor for objects of class DialogueManager
+     */
+    private Game() {
+    }
+    
+    /*
+    public static Game getInstance() {
+        return instance;
+    }   
+    */
+   
+    public static SceneManager getSceneManager() {
+        return SceneManager.getInstance();
+    }
+    
+    public static SoundManager getSoundManager() {
+        return SoundManager.getInstance();
+    }
+    
+    public static DialogueManager getDialogueManager() {
+        return DialogueManager.getInstance();
+    }
     
     public static void update() {
         SceneManager.getInstance().update();
@@ -75,43 +106,39 @@ public final class Game
     }
     
     public static Dialogue getDialogue(String id) {
-        return DialogueManager.getDialogue(id);
+        return DialogueManager.getInstance().getDialogue(id);
     }
     
     public static boolean isDialogueClosed(String id) {
-        return DialogueManager.isDialogueClosed(id);
+        return DialogueManager.getInstance().isDialogueClosed(id);
     }
     
     public static Dialogue openDialogue(String id, PlayerCharacter player, Character interlocutor) {
-        return DialogueManager.openDialogue(id, player, interlocutor);
+        return DialogueManager.getInstance().openDialogue(id, player, interlocutor);
     }
     
     public static boolean exitDialogue() {
-        return DialogueManager.exitDialogue();
+        return DialogueManager.getInstance().exitDialogue();
     }
 
     public static void enableDialogueChoices(boolean enabled) {
-        DialogueManager.enableDialogueChoices(enabled);
+        DialogueManager.getInstance().enableDialogueChoices(enabled);
     }
    
     public static Dialogue redirectToDialogue(String id, PlayerCharacter player, Character interlocutor) {
-        return DialogueManager.redirectToDialogue(id, player, interlocutor);
+        return DialogueManager.getInstance().redirectToDialogue(id, player, interlocutor);
     }
     
     public static void updateDialogueMessages() {    
-        DialogueManager.updateDialogueMessages();
+        DialogueManager.getInstance().updateDialogueMessages();
     }
    
     public static boolean closeDialogue(String id) {
-        return DialogueManager.closeDialogue(id);
+        return DialogueManager.getInstance().closeDialogue(id);
     }    
     
     public static void setScene(Scene scene) {
         SceneManager.getInstance().setScene(scene);
-    }
- 
-    public static String generateRandomString() {
-        return new java.math.BigInteger(130, random).toString(32);
     }
     
     public static Scene getScene() {
@@ -122,6 +149,10 @@ public final class Game
         SceneManager.getInstance().addScene(scene);
     }
     
+    public static String generateRandomString() {
+        return new java.math.BigInteger(130, random).toString(32);
+    }
+
     public static Inventory getInventory() {
         return inventory;
     }
@@ -133,5 +164,37 @@ public final class Game
     public static void addInventoryItem(InventoryItem item) {
         inventory.addItem(item);
     }
- 
+    
+    public static void playMusic() {
+        SceneManager.getInstance().playMusic();
+    }
+    
+    public static void pauseMusic() {
+        SceneManager.getInstance().pauseMusic();
+    }
+
+    public static boolean isRunning() {
+        return isRunning;
+    }
+    
+    public static void setup() {
+        if(!isSet) {
+            ScriptManager.invokeMethod("scripts", "gameConfig", "setup");
+            isSet = true;
+        }
+    }
+    
+    public static void start() {
+        if(!isSet) {
+            setup();
+        }
+        isRunning = true;
+        ScriptManager.invokeMethod("scripts", "gameConfig", "start");
+    }
+
+    public static void pause() {
+        isRunning = false;
+        ScriptManager.invokeMethod("scripts", "gameConfig", "pause");
+    }
+
 }

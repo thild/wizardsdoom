@@ -43,8 +43,8 @@ public abstract class PlayerCharacter extends Character implements Dialogable
      */
     public boolean canMove(Direction direction)
     {
-        int width = Game.getScene().getWidth();
-        int height = Game.getScene().getHeight();
+        int width = SceneManager.getInstance().getScene().getWidth();
+        int height = SceneManager.getInstance().getScene().getHeight();
         int x = getX();
         int y = getY();
         switch(direction) {
@@ -142,14 +142,14 @@ public abstract class PlayerCharacter extends Character implements Dialogable
      * @return The dialogue initiated.
      */
     public Dialogue initiateDialogueWith(String id, Character interlocutor) {
-        Dialogue d = DialogueManager.openDialogue(id, this, interlocutor);
+        Dialogue d = DialogueManager.getInstance().openDialogue(id, this, interlocutor);
         if(d == null || d.isClosed()) return null;
         addDialogue(d, interlocutor);
         return d;
     }
     
     public Dialogue queueDialogue(String id, Character interlocutor) {
-        Dialogue d = DialogueManager.openDialogue(id, this, interlocutor);
+        Dialogue d = DialogueManager.getInstance().openDialogue(id, this, interlocutor);
         if(d == null || d.isClosed()) return null;
         addDialogue(d, interlocutor);
         return d;
@@ -190,7 +190,7 @@ public abstract class PlayerCharacter extends Character implements Dialogable
             current.close();
             Dialogue dialogue = dialogues.get(interlocutor).poll();
             if(dialogue.hasNextDialogue()) {
-                Dialogue nextDialogue = DialogueManager.getDialogue(dialogue.getNextDialogue());
+                Dialogue nextDialogue = DialogueManager.getInstance().getDialogue(dialogue.getNextDialogue());
                 addDialogue(nextDialogue, interlocutor);
             }
             Queue<Dialogue> queue = null;
