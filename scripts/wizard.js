@@ -1,4 +1,4 @@
-
+load("nashorn:mozilla_compat.js");
 
 var wizard = new function(){
   this.interact = function(pc, npc) {

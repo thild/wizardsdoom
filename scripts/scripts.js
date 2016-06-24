@@ -3,9 +3,10 @@
 //http://blogger.ziesemer.com/2007/10/respecting-javascript-global-namespace.html
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 var game = Packages.Game;
+load("nashorn:mozilla_compat.js");
 
 var gameConfig = new function() {
-  this.setup = function() {
+this.setup = function() {
     importClass(Packages.Scene);
     importClass(Packages.NonPlayerCharacter);
     importClass(Packages.Wizard);

@@ -1,6 +1,6 @@
 //http://blogger.ziesemer.com/2007/10/respecting-javascript-global-namespace.html
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
-
+load("nashorn:mozilla_compat.js");
 var thief = new function(){
   this.touch = function(pc, npc) {
     //var pc = game.getEntity(pc);
