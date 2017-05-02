@@ -20,6 +20,10 @@ this.setup = function() {
     var w1 = new Wizard("wizard");
     w1.setLocation(300, 150);
     scene.addEntity(w1);
+
+    var w2 = new Wizard("wizard2");
+    w1.setLocation(500, 150);
+    scene.addEntity(w2);
     
     var knight = new Knight("knight");
     knight.setLocation(420, 300);
@@ -106,7 +110,7 @@ var thief = new function(){
       }
       else {
 	character.stopSpeak();
-	character.speak("Are you deaf!? Leave me alone!");
+	character.speak("Sai fora!? Leave me alone!");
       }
   }
 
@@ -123,6 +127,12 @@ var thief2 = new function(){
     pc.speak("Ow no! I'm luck! Now I have $" + pc.getMoney());
     npc.speak("Wellcome!");
     game.playSound("chaching");
+  }
+  
+  this.click = function(character) {
+  }
+  
+  this.interact = function(pc, npc) {
   }
   
 }();
@@ -151,7 +161,14 @@ var wizard = new function(){
     }
   }
 
+  this.touch = function(pc, npc) {
   
+  }
+  
+  this.click = function(character) {
+  }
+  
+ 
   this.evaluateDialogue = function(dialogue, choice) {
 	choiceEvaluator.evaluate(choice);
   }  
@@ -181,9 +198,9 @@ var wizard = new function(){
 	var c1 = new AnswerChoice("Istanbul");
 	d.addChoice(c1);
 	choiceManager.addChoseFunction(c1, function() {
-	  println(c1.getMessage());
+	  //println(c1.getMessage());
 	  if(c1.wasChosen()) {
-	    game.exitDialogue();
+	    game.exitDialogue(id);
 	    return;
 	  }	  
 	  d.setFeedbackMessage("Seems you missed some geography lessons. You loose 5 points of inteligence.");
@@ -198,9 +215,9 @@ var wizard = new function(){
 	var c2 = new AnswerChoice("Rio de Janeiro");
 	d.addChoice(c2);
 	choiceManager.addChoseFunction(c2, function() {
-	  println(c2.getMessage());
+	  //println(c2.getMessage());
 	  if(c2.wasChosen()) {
-	    game.exitDialogue();
+	    game.exitDialogue(id);
 	    return;
 	  }	  
 	  d.setFeedbackMessage("Really!? You loose 7 points of inteligence.");
@@ -215,9 +232,9 @@ var wizard = new function(){
 	var c3 = new AnswerChoice("Ankara");
 	d.addChoice(c3);
 	choiceManager.addChoseFunction(c3, function() {
-	  println(c3.getMessage());
+	  //println(c3.getMessage());
 	  if(c3.wasChosen()) {
-	    game.exitDialogue();
+	    game.exitDialogue(id);
 	    return;
 	  }	  
 	  d.setFeedbackMessage("You're correct! You won 5 points of inteligence.");
@@ -238,7 +255,7 @@ var wizard = new function(){
 	var c4 = new HintChoice("Please, give me a hint!");
 	d.addChoice(c4);
 	choiceManager.addChoseFunction(c4, function() {
-	  println(c4.getMessage());
+	  //println(c4.getMessage());
 	  d.setFeedbackMessage("Is not the famous one.");
 	  c4.markAsChosen();
 	  game.updateDialogueMessages();
@@ -247,9 +264,9 @@ var wizard = new function(){
 	var c5 = new ExitChoice("Never mind!");
 	d.addChoice(c5);
 	choiceManager.addChoseFunction(c5, function() {
-	  println(c5.getMessage());
+	  //println(c5.getMessage());
 	  if(c5.wasChosen()) {
-	    game.exitDialogue();
+	    game.exitDialogue(id);
 	    return;
 	  }	  
 	  d.setFeedbackMessage("Come back when you know de answer.");

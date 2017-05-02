@@ -1,4 +1,3 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)  
 import java.awt.*;
 import java.awt.image.*; 
 import java.text.*;
@@ -14,7 +13,7 @@ import java.awt.geom.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class SpeechBubble extends Actor
+public class SpeechBubble extends greenfoot.Actor
 {
     private static final int PADDING = 8;
     private static final int HALF_PADDING = PADDING / 2;
@@ -54,7 +53,7 @@ public class SpeechBubble extends Actor
     {  
         this.character = character;
         this.text = text;
-        GreenfootImage gi = new greenfoot.GreenfootImage(200, 100);
+        greenfoot.GreenfootImage gi = new greenfoot.GreenfootImage(200, 100);
         image = gi.getAwtImage();
         setImage(gi);  
     }
@@ -276,7 +275,7 @@ public class SpeechBubble extends Actor
     
     public void act() {
         if(getWorld() == null) return;
-        if (Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("escape")) {    
+        if (greenfoot.Greenfoot.mouseClicked(this) || greenfoot.Greenfoot.isKeyDown("escape")) {    
             character.stopSpeak();  
             return;
         }  

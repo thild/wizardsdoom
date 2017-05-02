@@ -125,10 +125,11 @@ public final class DialogueManager
         return false;
     }
     
-    public boolean exitDialogue() {
+    public boolean exitDialogue(String id) {
         if(SceneManager.getInstance().getCurrentWorld() instanceof DialogueWorld) {
            DialogueWorld dw =  (DialogueWorld)SceneManager.getInstance().getCurrentWorld();
            dw.getDialoguePanel().dispose();
+           SoundManager.getInstance().stopSound(dialogues.get(id).getSoundToPlay());
            return true;
         }
         return false;

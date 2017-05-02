@@ -117,8 +117,8 @@ public final class Game
         return DialogueManager.getInstance().openDialogue(id, player, interlocutor);
     }
     
-    public static boolean exitDialogue() {
-        return DialogueManager.getInstance().exitDialogue();
+    public static boolean exitDialogue(String id) {
+        return DialogueManager.getInstance().exitDialogue(id);
     }
 
     public static void enableDialogueChoices(boolean enabled) {
